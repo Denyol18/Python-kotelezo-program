@@ -5,6 +5,7 @@ Jatekter beallitasok
 import pygame as pg
 
 _ = False
+
 mini_map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 1],

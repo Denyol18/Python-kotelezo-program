@@ -8,14 +8,18 @@ import map as m
 import settings as s
 
 
+def check_events():
+    for event in pg.event.get():
+        if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+            pg.quit()
+            sys.exit()
+
+
 class Game:
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode(s.RES)
         self.clock = pg.time.Clock()
-        self.new_game()
-
-    def new_game(self):
         self.map = m.Map(self)
 
     def update(self):
@@ -27,16 +31,9 @@ class Game:
         self.screen.fill('black')
         self.map.draw()
 
-    def check_events(self):
-        for event in pg.event.get():
-            if event.type == pg.QUIT or \
-                    (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-                pg.quit()
-                sys.exit()
-
     def run(self):
         while True:
-            self.check_events()
+            check_events()
             self.update()
             self.draw()
 
