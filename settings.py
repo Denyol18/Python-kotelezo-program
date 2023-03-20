@@ -1,6 +1,11 @@
 """
-Jatek beallitasok
+Altalanos jatek beallitasok
 """
 
-RES = WIDTH, HEIGHT = 1280, 800
+RES = WIDTH, HEIGHT = 1280, 720
 FPS = 60
+
+PLAYER_POS = 3, 6
+PLAYER_ANGLE = 0
+PLAYER_SPEED = 0.02
+PLAYER_ROT_SPEED = 0.01

@@ -6,6 +6,7 @@ import sys
 import pygame as pg
 import map as m
 import settings as s
+import player as p
 
 
 def check_events():
@@ -20,16 +21,20 @@ class Game:
         pg.init()
         self.screen = pg.display.set_mode(s.RES)
         self.clock = pg.time.Clock()
+        self.delta_time = 1
         self.map = m.Map(self)
+        self.player = p.Player(self)
 
     def update(self):
         pg.display.flip()
-        self.clock.tick(s.FPS)
+        self.delta_time = self.clock.tick(s.FPS)
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}')
+        self.player.update()
 
     def draw(self):
         self.screen.fill('black')
         self.map.draw()
+        self.player.draw()
 
     def run(self):
         while True:
