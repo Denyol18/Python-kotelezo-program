@@ -11,7 +11,8 @@ import player as p
 
 def check_events():
     for event in pg.event.get():
-        if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+        if event.type == pg.QUIT or \
+                (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
             pg.quit()
             sys.exit()
 
