@@ -1,9 +1,5 @@
-"""
-Jatek engine, ray casting megvalositasa
-"""
-
-import math
 import pygame as pg
+import math
 import settings as s
 
 
@@ -16,10 +12,9 @@ class RayCasting:
         map_x, map_y = self.game.player.map_pos
 
         ray_angle = self.game.player.angle - s.HALF_FOV + 0.0001
-
         for ray in range(s.NUM_RAYS):
             sin_a = math.sin(ray_angle)
-            cos_a = math.sin(ray_angle)
+            cos_a = math.cos(ray_angle)
 
             # Vizszintes
 
