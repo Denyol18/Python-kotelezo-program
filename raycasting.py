@@ -57,10 +57,19 @@ class RayCasting:
             else:
                 depth = hor_depth
 
-            # Rajzolas
+            # Fishbowl effect eltuntetese
 
-            pg.draw.line(self.game.screen, 'white', (80 * pos_x, 80 * pos_y),
-                         (80 * pos_x + 80 * depth * cos_a, 80 * pos_y + 80 * depth * sin_a), 2)
+            depth *= math.cos(self.game.player.angle - ray_angle)
+
+            # Kivetites
+
+            proj_height = s.SCREEN_DIST / (depth + 0.0001)
+
+            # Fal rajzolas
+
+            color = [255 / (1 + depth ** 5 * 0.005)] * 3
+            pg.draw.rect(self.game.screen, color,
+                         (ray * s.SCALE, s.HALF_HEIGHT - proj_height // 2, s.SCALE, proj_height))
 
             ray_angle += s.DELTA_ANGLE
 
