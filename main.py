@@ -1,6 +1,4 @@
-"""
-Jatek main scriptje
-"""
+"""Játék main scriptje, gerince"""
 
 import sys
 import pygame as pg
@@ -11,6 +9,7 @@ import raycasting as r
 
 
 def check_events():
+    """Billentyű kezelő statikus függvény"""
     for event in pg.event.get():
         if event.type == pg.QUIT or \
                 (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
@@ -19,6 +18,7 @@ def check_events():
 
 
 class Game:
+    """Magát a játékot reprezentáló osztály"""
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode(s.RES)
@@ -29,6 +29,7 @@ class Game:
         self.raycasting = r.RayCasting(self)
 
     def update(self):
+        """Ablakot megjelenítő, azt adatokkal folyamatosan ellátó függvény"""
         self.player.update()
         self.raycasting.update()
         pg.display.flip()
@@ -36,11 +37,13 @@ class Game:
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}')
 
     def draw(self):
+        """Ablakot elemekkel feltöltő függvény"""
         self.screen.fill('black')
         # self.map.draw()
         # self.player.draw()
 
     def run(self):
+        """Játékot futtató függvény, mainben kell meghívni"""
         while True:
             check_events()
             self.update()

@@ -1,6 +1,4 @@
-"""
-Altalanos jatek beallitasok
-"""
+"""Általános játék beállítások scriptje"""
 
 import math
 
