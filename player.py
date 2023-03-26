@@ -54,9 +54,10 @@ class Player:
 
     def check_wall_collision(self, inc_x, inc_y):
         """Fallal való ütközés detektáló és kezelő függvény"""
-        if self.check_wall(int(self.x + inc_x), int(self.y)):
+        scale = s.PLAYER_SIZE_SCALE / self.game.delta_time
+        if self.check_wall(int(self.x + inc_x * scale), int(self.y)):
             self.x += inc_x
-        if self.check_wall(int(self.x), int(self.y + inc_y)):
+        if self.check_wall(int(self.x), int(self.y + inc_y * scale)):
             self.y += inc_y
 
     def draw(self):
