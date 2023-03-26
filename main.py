@@ -6,15 +6,7 @@ import map as m
 import settings as s
 import player as p
 import raycasting as r
-
-
-def check_events():
-    """Billentyű kezelő statikus függvény"""
-    for event in pg.event.get():
-        if event.type == pg.QUIT or \
-                (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-            pg.quit()
-            sys.exit()
+import object_renderer as o
 
 
 class Game:
@@ -26,7 +18,17 @@ class Game:
         self.delta_time = 1
         self.map = m.Map(self)
         self.player = p.Player(self)
+        self.object_renderer = o.ObjectRenderer(self)
         self.raycasting = r.RayCasting(self)
+
+    @staticmethod
+    def check_events():
+        """Billentyű kezelő statikus függvény"""
+        for event in pg.event.get():
+            if event.type == pg.QUIT or \
+                    (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                pg.quit()
+                sys.exit()
 
     def update(self):
         """Ablakot megjelenítő, azt adatokkal folyamatosan ellátó függvény"""
@@ -39,13 +41,14 @@ class Game:
     def draw(self):
         """Ablakot elemekkel feltöltő függvény"""
         self.screen.fill('black')
+        self.object_renderer.draw()
         # self.map.draw()
         # self.player.draw()
 
     def run(self):
         """Játékot futtató függvény, mainben kell meghívni"""
         while True:
-            check_events()
+            self.check_events()
             self.update()
             self.draw()
 
