@@ -6,6 +6,7 @@ import settings as s
 
 class ObjectRenderer:
     """Objektum renderelőt reprezentáló osztály"""
+
     def __init__(self, game):
         self.game = game
         self.screen = game.screen
@@ -17,6 +18,7 @@ class ObjectRenderer:
     def draw(self):
         """Fő rajzoló függvény, a render_game_objects
         munkáját itt hívjuk meg"""
+
         self.draw_background()
         self.render_game_objects()
 

@@ -26,6 +26,7 @@ class Game:
     @staticmethod
     def check_events():
         """Billentyű kezelő statikus függvény"""
+
         for event in pg.event.get():
             if event.type == pg.QUIT or \
                     (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
