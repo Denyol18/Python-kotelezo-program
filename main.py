@@ -11,6 +11,7 @@ import object_renderer as o
 
 class Game:
     """Magát a játékot reprezentáló osztály"""
+
     def __init__(self):
         pg.init()
         pg.mouse.set_visible(False)
@@ -33,6 +34,7 @@ class Game:
 
     def update(self):
         """Ablakot megjelenítő, azt adatokkal folyamatosan ellátó függvény"""
+
         self.player.update()
         self.raycasting.update()
         pg.display.flip()
@@ -41,13 +43,15 @@ class Game:
 
     def draw(self):
         """Ablakot elemekkel feltöltő függvény"""
-        self.screen.fill('black')
+
+        # self.screen.fill('black')
         self.object_renderer.draw()
         # self.map.draw()
         # self.player.draw()
 
     def run(self):
         """Játékot futtató függvény, mainben kell meghívni"""
+
         while True:
             self.check_events()
             self.update()

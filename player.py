@@ -7,6 +7,7 @@ import settings as s
 
 class Player:
     """Játékost reprezentáló osztály"""
+
     def __init__(self, game):
         self.rel = None
         self.game = game
@@ -15,6 +16,7 @@ class Player:
 
     def movement(self):
         """Játékos mozgásáért felelős függvény"""
+
         sin_a = math.sin(self.angle)
         cos_a = math.cos(self.angle)
         inc_x, inc_y = 0, 0
@@ -51,10 +53,12 @@ class Player:
 
     def check_wall(self, x, y):
         """Falat detektáló függvény"""
+
         return (x, y) not in self.game.map.world_map
 
     def check_wall_collision(self, inc_x, inc_y):
         """Fallal való ütközés detektáló és kezelő függvény"""
+
         scale = s.PLAYER_SIZE_SCALE / self.game.delta_time
         if self.check_wall(int(self.x + inc_x * scale), int(self.y)):
             self.x += inc_x
@@ -64,6 +68,7 @@ class Player:
     def draw(self):
         """Játékost reprezentáló kör és iránymutató
         vonal rajzoló függvény debugging célból"""
+
         # pg.draw.line(self.game.screen, 'blue', (self.x * 80, self.y * 80),
         #             (self.x * 80 + s.WIDTH * math.cos(self.angle),
         #             self.y * 80 + s.WIDTH * math.sin(self.angle)), 2)
@@ -72,6 +77,7 @@ class Player:
 
     def mouse_control(self):
         """A játékos forgásáért felelős függvény"""
+
         m_x, m_y = pg.mouse.get_pos()
         if m_x < s.MOUSE_BORDER_LEFT or m_x > s.MOUSE_BORDER_RIGHT:
             pg.mouse.set_pos([s.HALF_WIDTH, s.HALF_HEIGHT])
@@ -83,16 +89,19 @@ class Player:
 
     def update(self):
         """Játékos frissítő függvény amit a Game osztályban hívunk meg"""
+
         self.movement()
         self.mouse_control()
 
     @property
     def pos(self):
         """Játékos koordinátáival visszatérő függvény"""
+
         return self.x, self.y
 
     @property
     def map_pos(self):
         """Függvény mely visszatér azzal a négyzettel,
         amelyiken a játékos éppen áll"""
+
         return int(self.x), int(self.y)

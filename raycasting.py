@@ -16,6 +16,7 @@ class RayCasting:
 
     def get_objects_to_render(self):
         """Megrajzolni kívánt objektumokat lekérő függvény"""
+
         self.objects_to_render = []
         for ray, values in enumerate(self.result):
             depth, proj_height, texture, offset = values
@@ -47,6 +48,7 @@ class RayCasting:
 
     def ray_cast(self):
         """Ray castinget megvalósító függvény"""
+
         self.result = []
         pos_x, pos_y = self.game.player.pos
         map_x, map_y = self.game.player.map_pos
@@ -120,5 +122,6 @@ class RayCasting:
 
     def update(self):
         """Ray castinget frissítő függvény amit a Game osztályban hívunk meg"""
+
         self.ray_cast()
         self.get_objects_to_render()
