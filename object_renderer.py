@@ -16,8 +16,8 @@ class ObjectRenderer:
         self.ceiling_offset = 0
 
     def draw(self):
-        """Fő rajzoló függvény, a render_game_objects
-        munkáját itt hívjuk meg"""
+        """A rajzoló függvények együttesét
+        képező függvény"""
 
         self.draw_background()
         self.render_game_objects()

@@ -121,7 +121,7 @@ class RayCasting:
             ray_angle += s.DELTA_ANGLE
 
     def update(self):
-        """Ray castinget frissítő függvény amit a Game osztályban hívunk meg"""
+        """Ray castinget frissítő függvény"""
 
         self.ray_cast()
         self.get_objects_to_render()

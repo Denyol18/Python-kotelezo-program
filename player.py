@@ -88,7 +88,7 @@ class Player:
         self.angle += self.rel * s.MOUSE_SENSITIVITY * self.game.delta_time
 
     def update(self):
-        """Játékos frissítő függvény amit a Game osztályban hívunk meg"""
+        """Játékos frissítő függvény"""
 
         self.movement()
         self.mouse_control()
