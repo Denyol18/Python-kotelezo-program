@@ -12,7 +12,8 @@ class ObjectRenderer:
         self.wall_textures = self.load_wall_textures()
 
     def draw(self):
-        """Fő rajzoló függvény, a render_game_objects munkáját itt hívjuk meg"""
+        """Fő rajzoló függvény, a render_game_objects
+        munkáját itt hívjuk meg"""
         self.render_game_objects()
 
     def render_game_objects(self):

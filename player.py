@@ -8,6 +8,7 @@ import settings as s
 class Player:
     """Játékost reprezentáló osztály"""
     def __init__(self, game):
+        self.rel = None
         self.game = game
         self.x, self.y = s.PLAYER_POS
         self.angle = s.PLAYER_ANGLE
@@ -40,11 +41,11 @@ class Player:
 
         self.check_wall_collision(inc_x, inc_y)
 
-        if keys[pg.K_LEFT]:
-            self.angle -= s.PLAYER_ROT_SPEED * self.game.delta_time
+        # if keys[pg.K_LEFT]:
+        #    self.angle -= s.PLAYER_ROT_SPEED * self.game.delta_time
 
-        if keys[pg.K_RIGHT]:
-            self.angle += s.PLAYER_ROT_SPEED * self.game.delta_time
+        # if keys[pg.K_RIGHT]:
+        #    self.angle += s.PLAYER_ROT_SPEED * self.game.delta_time
 
         self.angle %= math.tau
 
@@ -69,9 +70,19 @@ class Player:
         pg.draw.circle(self.game.screen, 'yellow',
                        (self.x * 80, self.y * 80), 15)
 
+    def mouse_control(self):
+        """A játékos forgásáért felelős függvény"""
+        m_x, m_y = pg.mouse.get_pos()
+        if m_x < s.MOUSE_BORDER_LEFT or m_x > s.MOUSE_BORDER_RIGHT:
+            pg.mouse.set_pos([s.HALF_WIDTH, s.HALF_HEIGHT])
+        self.rel = pg.mouse.get_rel()[0]
+        self.rel = max(-s.MOUSE_MAX_REL, min(s.MOUSE_MAX_REL, self.rel))
+        self.angle += self.rel * s.MOUSE_SENSITIVITY * self.game.delta_time
+
     def update(self):
         """Játékos frissítő függvény amit a Game osztályban hívunk meg"""
         self.movement()
+        self.mouse_control()
 
     @property
     def pos(self):
