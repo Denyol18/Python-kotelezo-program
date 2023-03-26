@@ -75,6 +75,8 @@ class Player:
         m_x, m_y = pg.mouse.get_pos()
         if m_x < s.MOUSE_BORDER_LEFT or m_x > s.MOUSE_BORDER_RIGHT:
             pg.mouse.set_pos([s.HALF_WIDTH, s.HALF_HEIGHT])
+        if m_y < s.MOUSE_BORDER_TOP or m_y > s.MOUSE_BORDER_BOTTOM:
+            pg.mouse.set_pos([s.HALF_WIDTH, s.HALF_HEIGHT])
         self.rel = pg.mouse.get_rel()[0]
         self.rel = max(-s.MOUSE_MAX_REL, min(s.MOUSE_MAX_REL, self.rel))
         self.angle += self.rel * s.MOUSE_SENSITIVITY * self.game.delta_time
