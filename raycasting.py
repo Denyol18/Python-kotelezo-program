@@ -19,11 +19,20 @@ class RayCasting:
         for ray, values in enumerate(self.result):
             depth, proj_height, texture, offset = values
 
-            wall_column = self.textures[texture].subsurface(
-                offset * (s.TEXTURE_SIZE - s.SCALE), 0, s.SCALE, s.TEXTURE_SIZE
-            )
-            wall_column = pg.transform.scale(wall_column, (s.SCALE, proj_height))
-            wall_pos = (ray * s.SCALE, s.HALF_HEIGHT - proj_height // 2)
+            if proj_height < s.HEIGHT:
+                wall_column = self.textures[texture].subsurface(
+                    offset * (s.TEXTURE_SIZE - s.SCALE), 0, s.SCALE, s.TEXTURE_SIZE
+                )
+                wall_column = pg.transform.scale(wall_column, (s.SCALE, proj_height))
+                wall_pos = (ray * s.SCALE, s.HALF_HEIGHT - proj_height // 2)
+            else:
+                texture_height = s.TEXTURE_SIZE * s.HEIGHT / proj_height
+                wall_column = self.textures[texture].subsurface(
+                    offset * (s.TEXTURE_SIZE - s.SCALE), s.HALF_TEXTURE_SIZE - texture_height // 2,
+                    s.SCALE, texture_height
+                )
+                wall_column = pg.transform.scale(wall_column, (s.SCALE, s.HEIGHT))
+                wall_pos = (ray * s.SCALE, 0)
 
             self.objects_to_render.append((depth, wall_column, wall_pos))
 
