@@ -8,7 +8,8 @@ import settings as s
 class Sprite:
     """Spriteot reprezentáló osztály"""
 
-    def __init__(self, game, path='resources/sprites/static_sprites/barrel.png', pos=(9, 5)):
+    def __init__(self, game, path='resources/sprites/'
+                                  'static_sprites/barrel.png', pos=(9, 5)):
         self.game = game
         self.player = game.player
         self.x, self.y = pos
@@ -28,9 +29,11 @@ class Sprite:
         image = pg.transform.scale(self.image, (proj_width, proj_height))
 
         sprite_half_width = proj_width // 2
-        pos = self.screen_x - sprite_half_width, s.HALF_HEIGHT - proj_height // 2
+        pos = self.screen_x - sprite_half_width, \
+            s.HALF_HEIGHT - proj_height // 2
 
-        self.game.raycasting.objects_to_render.append((self.norm_dist, image, pos))
+        self.game.raycasting.objects_to_render.append(
+            (self.norm_dist, image, pos))
 
     def get_sprites(self):
         """Spriteokat lekérő függvény"""
@@ -48,7 +51,8 @@ class Sprite:
 
         dist = math.hypot(d_x, d_y)
         self.norm_dist = dist * math.cos(delta)
-        if -self.IMAGE_HALF_WIDTH < self.screen_x < (s.WIDTH + self.IMAGE_HALF_WIDTH) and self.norm_dist > 0.5:
+        if -self.IMAGE_HALF_WIDTH < self.screen_x < \
+                (s.WIDTH + self.IMAGE_HALF_WIDTH) and self.norm_dist > 0.5:
             self.get_sprite_projection()
 
     def update(self):
