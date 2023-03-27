@@ -11,9 +11,9 @@ class ObjectRenderer:
         self.game = game
         self.screen = game.screen
         self.wall_textures = self.load_wall_textures()
-        self.ceiling_image = self.get_texture('resources/textures/ceiling.png',
-                                              (s.WIDTH, s.HALF_HEIGHT))
-        self.ceiling_offset = 0
+        self.sky_image = self.get_texture('resources/textures/sky.jpg',
+                                          (s.WIDTH, s.HALF_HEIGHT))
+        self.sky_offset = 0
 
     def draw(self):
         """A rajzoló függvények együttesét
@@ -26,14 +26,14 @@ class ObjectRenderer:
         """Háttér rajzoló függvény"""
 
         # Plafon
-        self.ceiling_offset = (self.ceiling_offset +
-                               4.5 * self.game.player.rel) % s.WIDTH
+        self.sky_offset = (self.sky_offset +
+                           4.5 * self.game.player.rel) % s.WIDTH
 
-        self.screen.blit(self.ceiling_image,
-                         (-self.ceiling_offset, 0))
+        self.screen.blit(self.sky_image,
+                         (-self.sky_offset, 0))
 
-        self.screen.blit(self.ceiling_image,
-                         (-self.ceiling_offset + s.WIDTH, 0))
+        self.screen.blit(self.sky_image,
+                         (-self.sky_offset + s.WIDTH, 0))
         # Padló
         pg.draw.rect(self.screen, s.FLOOR_COLOR,
                      (0, s.HALF_HEIGHT, s.WIDTH, s.HEIGHT))
@@ -57,6 +57,6 @@ class ObjectRenderer:
 
         return {
             1: self.get_texture('resources/textures/1.jpg'),
-            2: self.get_texture('resources/textures/2.jpg'),
-            3: self.get_texture('resources/textures/3.jpg')
+            2: self.get_texture('resources/textures/1.jpg'),
+            3: self.get_texture('resources/textures/1.jpg')
         }
