@@ -14,9 +14,9 @@ class Sprite:
         self.player = game.player
         self.x, self.y = pos
         self.image = pg.image.load(path).convert_alpha()
-        self.IMAGE_WIDTH = self.image.get_width()
-        self.IMAGE_HALF_WIDTH = self.image.get_width() // 2
-        self.IMAGE_RATIO = self.IMAGE_WIDTH / self.image.get_height()
+        self.image_width = self.image.get_width()
+        self.image_half_width = self.image.get_width() // 2
+        self.image_ratio = self.image_width / self.image.get_height()
         self.screen_x = 0
         self.norm_dist = 1
 
@@ -24,7 +24,7 @@ class Sprite:
         """Spriteok kivetítését lekérő függvény"""
 
         proj = s.SCREEN_DIST / self.norm_dist
-        proj_width, proj_height = proj * self.IMAGE_RATIO, proj
+        proj_width, proj_height = proj * self.image_ratio, proj
 
         image = pg.transform.scale(self.image, (proj_width, proj_height))
 
@@ -51,8 +51,8 @@ class Sprite:
 
         dist = math.hypot(d_x, d_y)
         self.norm_dist = dist * math.cos(delta)
-        if -self.IMAGE_HALF_WIDTH < self.screen_x < \
-                (s.WIDTH + self.IMAGE_HALF_WIDTH) and self.norm_dist > 0.5:
+        if -self.image_half_width < self.screen_x < \
+                (s.WIDTH + self.image_half_width) and self.norm_dist > 0.5:
             self.get_sprite_projection()
 
     def update(self):
