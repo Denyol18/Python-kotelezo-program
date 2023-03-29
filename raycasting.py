@@ -55,7 +55,7 @@ class RayCasting:
         hor_texture, vert_texture = 1, 1
 
         ray_angle = self.game.player.angle - s.HALF_FOV + 0.0001
-        for ray in range(s.NUM_RAYS):
+        for ray in range(s.NUM_RAYS):  # pylint: disable=unused-variable
             sin_a = math.sin(ray_angle)
             cos_a = math.cos(ray_angle)
 
@@ -68,7 +68,7 @@ class RayCasting:
             delta_depth = d_y / sin_a
             d_x = delta_depth * cos_a
 
-            for i in range(s.MAX_DEPTH):
+            for i in range(s.MAX_DEPTH):  # pylint: disable=unused-variable
                 hor_tile = int(hor_x), int(hor_y)
                 if hor_tile in self.game.map.world_map:
                     hor_texture = self.game.map.world_map[hor_tile]

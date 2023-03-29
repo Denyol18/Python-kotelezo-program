@@ -7,7 +7,7 @@ import settings as s
 import player as p
 import raycasting as r
 import object_renderer as o
-import sprite as sp
+# import sprite as sp
 import object_handler as oh
 
 

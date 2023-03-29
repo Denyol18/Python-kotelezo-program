@@ -13,7 +13,7 @@ class Sprite:
                  scale=0.5, shift=0.5):
         self.game = game
         self.player = game.player
-        self.x, self.y = pos
+        self.x, self.y = pos  # pylint: disable=invalid-name
         self.image = pg.image.load(path).convert_alpha()
         self.image_width = self.image.get_width()
         self.image_half_width = self.image.get_width() // 2

@@ -10,7 +10,7 @@ class Player:
 
     def __init__(self, game):
         self.game = game
-        self.x, self.y = s.PLAYER_POS
+        self.x, self.y = s.PLAYER_POS  # pylint: disable=invalid-name
         self.angle = s.PLAYER_ANGLE
         self.rel = 0
 
@@ -51,7 +51,7 @@ class Player:
 
         self.angle %= math.tau
 
-    def check_wall(self, x, y):
+    def check_wall(self, x, y):  # pylint: disable=invalid-name
         """Falat detektáló függvény"""
 
         return (x, y) not in self.game.map.world_map

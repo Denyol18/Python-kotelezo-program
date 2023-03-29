@@ -44,7 +44,9 @@ class ObjectRenderer:
         objects_list = sorted(self.game.raycasting.objects_to_render,
                               key=lambda t: t[0], reverse=True)
 
-        for depth, image, pos in objects_list:
+        for depth, image, pos in objects_list:  # pylint:
+            # disable=unused-variable
+
             self.screen.blit(image, pos)
 
     @staticmethod
