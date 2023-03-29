@@ -8,6 +8,7 @@ import player as p
 import raycasting as r
 import object_renderer as o
 import sprite as sp
+import object_handler as oh
 
 
 class Game:
@@ -23,7 +24,7 @@ class Game:
         self.player = p.Player(self)
         self.object_renderer = o.ObjectRenderer(self)
         self.raycasting = r.RayCasting(self)
-        self.sprite = sp.Sprite(self)
+        self.object_handler = oh.ObjectHandler(self)
 
     @staticmethod
     def check_events():
@@ -40,7 +41,7 @@ class Game:
 
         self.player.update()
         self.raycasting.update()
-        self.sprite.update()
+        self.object_handler.update()
         pg.display.flip()
         self.delta_time = self.clock.tick(s.FPS)
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}')

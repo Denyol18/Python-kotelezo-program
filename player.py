@@ -9,10 +9,10 @@ class Player:
     """Játékost reprezentáló osztály"""
 
     def __init__(self, game):
-        self.rel = None
         self.game = game
         self.x, self.y = s.PLAYER_POS
         self.angle = s.PLAYER_ANGLE
+        self.rel = 0
 
     def movement(self):
         """Játékos mozgásáért felelős függvény"""

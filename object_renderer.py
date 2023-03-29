@@ -25,7 +25,7 @@ class ObjectRenderer:
     def draw_background(self):
         """Háttér rajzoló függvény"""
 
-        # Plafon
+        # Égbolt
         self.sky_offset = (self.sky_offset +
                            4.5 * self.game.player.rel) % s.WIDTH
 
