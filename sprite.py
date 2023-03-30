@@ -1,6 +1,8 @@
 """Spriteok scriptje"""
 
+import os
 import math
+from collections import deque
 import pygame as pg
 import settings as s
 
@@ -11,6 +13,7 @@ class Sprite:
     def __init__(self, game, path='resources/sprites/'
                                   'static_sprites/barrel.png', pos=(9.8, 5),
                  scale=0.5, shift=0.5):
+
         self.game = game
         self.player = game.player
         self.x, self.y = pos  # pylint: disable=invalid-name
@@ -65,3 +68,53 @@ class Sprite:
         """Spriteokat frissítő függvény"""
 
         self.get_sprites()
+
+
+class AnimatedSprite(Sprite):
+    """Animált spriteot reprezentáló osztály,
+    ami a Sprite osztály gyerek osztálya"""
+
+    def __init__(self, game, path='rescources/sprites/'
+                                  'animated_sprites', pos=(5, 5),
+                 scale=0.5, shift=0.5, animation_time=120):
+
+        super().__init__(game, path, pos, scale, shift)
+        self.animation_time = animation_time
+        self.path = path.rsplit('/', 1)[0]
+        self.images = self.get_images(self.path)
+        self.animation_time_prev = pg.time.get_ticks()
+        self.animation_trigger = False
+
+    def update(self):
+        """Animált spriteokat frissítő függvény"""
+
+        super().update()
+        self.check_animation_time()
+        self.animate(self.images)
+
+    def animate(self, images):
+        """Animáció lejátszó függvény"""
+
+        if self.animation_trigger:
+            images.rotate(-1)
+            self.images = images[0]
+
+    def check_animation_time(self):
+        """Animáció idő figyelő függvény"""
+
+        self.animation_trigger = False
+        time_now = pg.time.get_ticks()
+        if time_now - self.animation_time_prev > self.animation_time:
+            self.animation_time_prev = time_now
+            self.animation_trigger = True
+
+    @staticmethod
+    def get_images(path):
+        """Képeket lekérő és tároló függvény"""
+
+        images = deque()
+        for file_name in os.listdir(path):
+            if os.path.isfile(os.path.join(path, file_name)):
+                img = pg.image.load(path + '/' + file_name).convert_alpha()
+                images.append(img)
+        return images

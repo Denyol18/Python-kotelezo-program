@@ -7,8 +7,9 @@ import settings as s
 import player as p
 import raycasting as r
 import object_renderer as o
-# import sprite as sp
 import object_handler as oh
+import weapon as w
+import sound as so
 
 
 class Game:
@@ -25,9 +26,10 @@ class Game:
         self.object_renderer = o.ObjectRenderer(self)
         self.raycasting = r.RayCasting(self)
         self.object_handler = oh.ObjectHandler(self)
+        self.weapon = w.Weapon(self)
+        self.sound = so.Sound(self)
 
-    @staticmethod
-    def check_events():
+    def check_events(self):
         """Billentyű kezelő statikus függvény"""
 
         for event in pg.event.get():
@@ -35,6 +37,7 @@ class Game:
                     (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 pg.quit()
                 sys.exit()
+            self.player.single_fire_event(event)
 
     def update(self):
         """Ablakot megjelenítő, azt adatokkal folyamatosan ellátó függvény"""
@@ -42,15 +45,17 @@ class Game:
         self.player.update()
         self.raycasting.update()
         self.object_handler.update()
+        self.weapon.update()
+        self.sound.machine_gun.set_volume(0.25)
         pg.display.flip()
         self.delta_time = self.clock.tick(s.FPS)
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}')
 
     def draw(self):
-        """Ablakot elemekkel feltöltő függvény"""
+        """Ablakba elemeket rajzoló függvény"""
 
-        # self.screen.fill('black')
         self.object_renderer.draw()
+        self.weapon.draw()
         # self.map.draw()
         # self.player.draw()
 

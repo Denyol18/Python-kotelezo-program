@@ -13,6 +13,17 @@ class Player:
         self.x, self.y = s.PLAYER_POS  # pylint: disable=invalid-name
         self.angle = s.PLAYER_ANGLE
         self.rel = 0
+        self.shot = False
+
+    def single_fire_event(self, event):
+        """Játékos fegyverrel való lővését
+        kezelő függvény"""
+
+        if event.type == pg.MOUSEBUTTONDOWN:
+            if event.button == 1 and not self.shot and not self.game.weapon.reloading:
+                self.game.sound.machine_gun.play()
+                self.shot = True
+                self.game.weapon.reloading = True
 
     def movement(self):
         """Játékos mozgásáért felelős függvény"""
