@@ -21,7 +21,7 @@ class Sprite:
         self.image_width = self.image.get_width()
         self.image_half_width = self.image.get_width() // 2
         self.image_ratio = self.image_width / self.image.get_height()
-        self.screen_x = 0
+        self.screen_x, self.sprite_half_width = 0, 0
         self.norm_dist = 1
         self.sprite_scale = scale
         self.sprite_height_shift = shift
@@ -34,18 +34,18 @@ class Sprite:
 
         image = pg.transform.scale(self.image, (proj_width, proj_height))
 
-        sprite_half_width = proj_width // 2
+        self.sprite_half_width = proj_width // 2
 
         height_shift = proj_height * self.sprite_height_shift
 
-        pos = self.screen_x - sprite_half_width, \
+        pos = self.screen_x - self.sprite_half_width, \
             s.HALF_HEIGHT - proj_height // 2 + height_shift
 
         self.game.raycasting.objects_to_render.append(
             (self.norm_dist, image, pos))
 
-    def get_sprites(self):
-        """Spriteokat lekérő függvény"""
+    def get_sprite(self):
+        """Spriteot lekérő függvény"""
 
         d_x = self.x - self.player.x
         d_y = self.y - self.player.y
@@ -67,7 +67,7 @@ class Sprite:
     def update(self):
         """Spriteokat frissítő függvény"""
 
-        self.get_sprites()
+        self.get_sprite()
 
 
 class AnimatedSprite(Sprite):
@@ -97,7 +97,7 @@ class AnimatedSprite(Sprite):
 
         if self.animation_trigger:
             images.rotate(-1)
-            self.images = images[0]
+            self.image = images[0]
 
     def check_animation_time(self):
         """Animáció idő figyelő függvény"""

@@ -12,7 +12,7 @@ class ObjectHandler:
         self.sprite_list = []
         self.npc_list = []
         self.npc_sprite_path = 'resources/sprites/npc'
-        self.static_sprites = 'resources/sprites/static_sprites'
+        self.static_sprite_path = 'resources/sprites/static_sprites'
         add_sprite = self.add_sprite
         add_npc = self.add_npc
 

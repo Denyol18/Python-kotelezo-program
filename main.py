@@ -46,7 +46,6 @@ class Game:
         self.raycasting.update()
         self.object_handler.update()
         self.weapon.update()
-        self.sound.machine_gun.set_volume(0.25)
         pg.display.flip()
         self.delta_time = self.clock.tick(s.FPS)
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}')
