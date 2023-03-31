@@ -21,8 +21,7 @@ class Sprite:
         self.image_width = self.image.get_width()
         self.image_half_width = self.image.get_width() // 2
         self.image_ratio = self.image_width / self.image.get_height()
-        self.screen_x, self.sprite_half_width, self.theta = 0, 0, 0
-        self.norm_dist = 1
+        self.screen_x, self.sprite_half_width, self.theta, self.norm_dist = 0, 0, 0, 1
         self.sprite_scale = scale
         self.sprite_height_shift = shift
 

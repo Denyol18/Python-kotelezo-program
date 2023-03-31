@@ -24,7 +24,7 @@ class Weapon(sp.AnimatedSprite):
         self.reloading = False
         self.num_images = len(self.images)
         self.frame_counter = 0
-        self.damage = 50
+        self.damage = 20
 
     def draw(self):
         """Fegyvert megrajzoló függvény"""
