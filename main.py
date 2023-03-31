@@ -30,7 +30,7 @@ class Game:
         self.sound = so.Sound(self)
 
     def check_events(self):
-        """Billentyű kezelő statikus függvény"""
+        """Billentyű kezelő függvény"""
 
         for event in pg.event.get():
             if event.type == pg.QUIT or \

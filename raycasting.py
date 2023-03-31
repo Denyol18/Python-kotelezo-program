@@ -15,7 +15,7 @@ class RayCasting:
         self.textures = self.game.object_renderer.wall_textures
 
     def get_objects_to_render(self):
-        """Megrajzolni kívánt objektumokat lekérő függvény"""
+        """Megrajzolni kívánt objektumokat lekérő és tároló függvény"""
 
         self.objects_to_render = []
         for ray, values in enumerate(self.result):

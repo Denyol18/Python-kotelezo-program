@@ -1,10 +1,10 @@
 """NPCk scriptje"""
 
 import math
+from random import randint, random, choice
 import pygame as pg
 import settings as s
 import sprite as sp
-from random import randint, random, choice
 
 
 class NPC(sp.AnimatedSprite):
@@ -151,5 +151,6 @@ class NPC(sp.AnimatedSprite):
 
         pg.draw.circle(self.game.screen, 'red', (80 * self.x, 80 * self.y), 15)
         if self.ray_cast_player_npc():
-            pg.draw.line(self.game.screen, 'orange', (80 * self.game.player.x, 80 * self.game.player.y),
+            pg.draw.line(self.game.screen, 'orange',
+                         (80 * self.game.player.x, 80 * self.game.player.y),
                          (80 * self.x, 80 * self.y), 2)
