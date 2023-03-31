@@ -24,7 +24,7 @@ class NPC(sp.AnimatedSprite):
         self.walk_images = self.get_images(self.path + '/walk')
 
         self.attack_dist = randint(3, 6)
-        self.speed = 0.002
+        self.speed = 0.02
         self.size = 10
         self.health = 100
         self.attack_damage = 10
@@ -41,6 +41,30 @@ class NPC(sp.AnimatedSprite):
         self.get_sprite()
         self.run_logic()
         # self.draw_ray_cast()
+
+    def check_wall(self, x, y):  # pylint: disable=invalid-name
+        """Falat detektáló függvény"""
+
+        return (x, y) not in self.game.map.world_map
+
+    def check_wall_collision(self, inc_x, inc_y):
+        """Fallal való ütközés detektáló és kezelő függvény"""
+
+        if self.check_wall(int(self.x + inc_x * self.size), int(self.y)):
+            self.x += inc_x
+        if self.check_wall(int(self.x), int(self.y + inc_y * self.size)):
+            self.y += inc_y
+
+    def movement(self):
+        """NPC mozgását megvalósító függvény"""
+
+        next_pos = self.game.player.map_pos
+        next_x, next_y = next_pos
+
+        angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
+        d_x = math.cos(angle) * self.speed
+        d_y = math.sin(angle) * self.speed
+        self.check_wall_collision(d_x, d_y)
 
     def animate_death(self):
         """NPC halálát animáló függvény"""
@@ -61,8 +85,7 @@ class NPC(sp.AnimatedSprite):
             self.pain = False
 
     def check_hit_in_npc(self):
-        """NPCt való eltalálás vizsgáló
-        függvény"""
+        """NPCt való eltalálás vizsgáló függvény"""
 
         if self.ray_cast_value and self.game.player.shot:
             if s.HALF_WIDTH - self.sprite_half_width < self.screen_x \
@@ -81,13 +104,19 @@ class NPC(sp.AnimatedSprite):
             self.game.sound.npc_death.play()
 
     def run_logic(self):
-        """NPC mozgását megvalósító függvény"""
+        """NPC életciklusát megvalósító és figyelő függvény"""
 
         if self.alive:
             self.ray_cast_value = self.ray_cast_player_npc()
             self.check_hit_in_npc()
+
             if self.pain:
                 self.animate_pain()
+
+            elif self.ray_cast_value:
+                self.animate(self.walk_images)
+                self.movement()
+
             else:
                 self.animate(self.idle_images)
         else:
