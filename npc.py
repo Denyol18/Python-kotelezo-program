@@ -109,7 +109,7 @@ class NPC(sp.AnimatedSprite):
             if hor_tile == self.map_pos:
                 h_player_dist = hor_depth
                 break
-            if hor_tile == self.game.map.world_map:
+            if hor_tile in self.game.map.world_map:
                 h_wall_dist = hor_depth
                 break
             hor_x += d_x
@@ -130,7 +130,7 @@ class NPC(sp.AnimatedSprite):
             if vert_tile == self.map_pos:
                 v_player_dist = vert_depth
                 break
-            if vert_tile == self.game.map.world_map:
+            if vert_tile in self.game.map.world_map:
                 v_wall_dist = vert_depth
                 break
             vert_x += d_x
