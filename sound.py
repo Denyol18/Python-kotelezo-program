@@ -1,4 +1,4 @@
-"""Hangkezelő scriptje"""
+"""Hangok scriptje"""
 
 import pygame as pg
 

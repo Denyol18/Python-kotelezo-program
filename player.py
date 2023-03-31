@@ -20,7 +20,8 @@ class Player:
         kezelő függvény"""
 
         if event.type == pg.MOUSEBUTTONDOWN:
-            if event.button == 1 and not self.shot and not self.game.weapon.reloading:
+            if event.button == 1 and not self.shot and \
+                    not self.game.weapon.reloading:
                 self.game.sound.machine_gun.play()
                 self.shot = True
                 self.game.weapon.reloading = True
