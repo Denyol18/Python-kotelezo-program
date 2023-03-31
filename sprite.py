@@ -21,7 +21,7 @@ class Sprite:
         self.image_width = self.image.get_width()
         self.image_half_width = self.image.get_width() // 2
         self.image_ratio = self.image_width / self.image.get_height()
-        self.screen_x, self.sprite_half_width = 0, 0
+        self.screen_x, self.sprite_half_width, self.theta = 0, 0, 0
         self.norm_dist = 1
         self.sprite_scale = scale
         self.sprite_height_shift = shift
@@ -49,8 +49,8 @@ class Sprite:
 
         d_x = self.x - self.player.x
         d_y = self.y - self.player.y
-        theta = math.atan2(d_y, d_x)
-        delta = theta - self.player.angle
+        self.theta = math.atan2(d_y, d_x)
+        delta = self.theta - self.player.angle
 
         if (d_x > 0 and self.player.angle > math.pi) or (d_x < 0 and d_y < 0):
             delta += math.tau

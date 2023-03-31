@@ -1,5 +1,7 @@
 """NPCk scriptje"""
 
+import math
+import pygame as pg
 import settings as s
 import sprite as sp
 from random import randint, random, choice
@@ -29,6 +31,7 @@ class NPC(sp.AnimatedSprite):
         self.accuracy = 0.15
         self.alive = True
         self.pain = False
+        self.ray_cast_value = False
 
     def update(self):
         """NPCt frissítő függvény"""
@@ -36,6 +39,7 @@ class NPC(sp.AnimatedSprite):
         self.check_animation_time()
         self.get_sprite()
         self.run_logic()
+        self.draw_ray_cast()
 
     def animate_pain(self):
         """NPC sérülését animáló
@@ -65,3 +69,87 @@ class NPC(sp.AnimatedSprite):
                 self.animate_pain()
             else:
                 self.animate(self.idle_images)
+
+    @property
+    def map_pos(self):
+        """Függvény mely visszatér azzal a négyzettel,
+        amelyiken az NPC éppen áll"""
+
+        return int(self.x), int(self.y)
+
+    def ray_cast_player_npc(self):
+        """Ray castinget megvalósító függvény
+        játékos és NPC között"""
+
+        if self.game.player.map_pos == self.map_pos:
+            return True
+
+        v_wall_dist, h_wall_dist = 0, 0
+        v_player_dist, h_player_dist = 0, 0
+
+        pos_x, pos_y = self.game.player.pos
+        map_x, map_y = self.game.player.map_pos
+
+        ray_angle = self.theta
+
+        sin_a = math.sin(ray_angle)
+        cos_a = math.cos(ray_angle)
+
+        # Vízszintes irány
+
+        hor_y, d_y = (map_y + 1, 1) if sin_a > 0 else (map_y - 1e-6, -1)
+        hor_depth = (hor_y - pos_y) / sin_a
+        hor_x = pos_x + hor_depth * cos_a
+
+        delta_depth = d_y / sin_a
+        d_x = delta_depth * cos_a
+
+        for i in range(s.MAX_DEPTH):  # pylint: disable=unused-variable
+            hor_tile = int(hor_x), int(hor_y)
+            if hor_tile == self.map_pos:
+                h_player_dist = hor_depth
+                break
+            if hor_tile == self.game.map.world_map:
+                h_wall_dist = hor_depth
+                break
+            hor_x += d_x
+            hor_y += d_y
+            hor_depth += delta_depth
+
+        # Függőleges irány
+
+        vert_x, d_x = (map_x + 1, 1) if cos_a > 0 else (map_x - 1e-6, -1)
+        vert_depth = (vert_x - pos_x) / cos_a
+        vert_y = pos_y + vert_depth * sin_a
+
+        delta_depth = d_x / cos_a
+        d_y = delta_depth * sin_a
+
+        for i in range(s.MAX_DEPTH):
+            vert_tile = int(vert_x), int(vert_y)
+            if vert_tile == self.map_pos:
+                v_player_dist = vert_depth
+                break
+            if vert_tile == self.game.map.world_map:
+                v_wall_dist = vert_depth
+                break
+            vert_x += d_x
+            vert_y += d_y
+            vert_depth += delta_depth
+
+        player_dist = max(v_player_dist, h_player_dist)
+        wall_dist = max(v_wall_dist, h_wall_dist)
+
+        if 0 < player_dist < wall_dist or not wall_dist:
+            return True
+        return False
+
+    def draw_ray_cast(self):
+        """ray_cast_player_npc függvényt tesztelő
+        függvény"""
+
+        pg.draw.circle(self.game.screen, 'red', (80 * self.x, 80 * self.y), 15)
+        if self.ray_cast_player_npc():
+            pg.draw.line(self.game.screen, 'orange', (80 * self.game.player.x, 80 * self.game.player.y),
+                         (80 * self.x, 80 * self.y), 2)
+

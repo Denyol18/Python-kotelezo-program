@@ -81,9 +81,9 @@ class Player:
         """Játékost reprezentáló kör és iránymutató
         vonal rajzoló függvény debugging célból"""
 
-        # pg.draw.line(self.game.screen, 'blue', (self.x * 80, self.y * 80),
-        #             (self.x * 80 + s.WIDTH * math.cos(self.angle),
-        #             self.y * 80 + s.WIDTH * math.sin(self.angle)), 2)
+        pg.draw.line(self.game.screen, 'blue', (self.x * 80, self.y * 80),
+                     (self.x * 80 + s.WIDTH * math.cos(self.angle),
+                     self.y * 80 + s.WIDTH * math.sin(self.angle)), 2)
         pg.draw.circle(self.game.screen, 'yellow',
                        (self.x * 80, self.y * 80), 15)
 
