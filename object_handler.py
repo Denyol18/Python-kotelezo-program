@@ -23,6 +23,7 @@ class ObjectHandler:
 
         # NPCk
         add_npc(n.NPC(game))
+        add_npc(n.NPC(game, pos=(11.5, 3.5)))
 
     def update(self):
         """Objektum kezelőt frissítő függvény"""

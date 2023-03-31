@@ -39,7 +39,7 @@ class NPC(sp.AnimatedSprite):
         self.check_animation_time()
         self.get_sprite()
         self.run_logic()
-        self.draw_ray_cast()
+        # self.draw_ray_cast()
 
     def animate_pain(self):
         """NPC sérülését animáló
@@ -53,7 +53,7 @@ class NPC(sp.AnimatedSprite):
         """NPCt való eltalálás vizsgáló
         függvény"""
 
-        if self.game.player.shot:
+        if self.ray_cast_value and self.game.player.shot:
             if s.HALF_WIDTH - self.sprite_half_width < self.screen_x \
                     < s.HALF_HEIGHT + self.sprite_half_width:
                 self.game.sound.npc_pain.play()
@@ -64,6 +64,7 @@ class NPC(sp.AnimatedSprite):
         """NPC mozgását megvalósító függvény"""
 
         if self.alive:
+            self.ray_cast_value = self.ray_cast_player_npc()
             self.check_hit_in_npc()
             if self.pain:
                 self.animate_pain()
@@ -152,4 +153,3 @@ class NPC(sp.AnimatedSprite):
         if self.ray_cast_player_npc():
             pg.draw.line(self.game.screen, 'orange', (80 * self.game.player.x, 80 * self.game.player.y),
                          (80 * self.x, 80 * self.y), 2)
-
