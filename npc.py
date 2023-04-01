@@ -59,14 +59,19 @@ class NPC(sp.AnimatedSprite):
     def movement(self):
         """NPC mozgását megvalósító függvény"""
 
-        next_pos = self.game.pathfinding.get_path(self.map_pos, self.game.player.map_pos)
+        next_pos = self.game.pathfinding.get_path(self.map_pos,
+                                                  self.game.player.map_pos)
+
         next_x, next_y = next_pos
 
-        # pg.draw.rect(self.game.screen, 'pink', (80 * next_x, 80 * next_y, 80, 80))
-        angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
-        d_x = math.cos(angle) * self.speed
-        d_y = math.sin(angle) * self.speed
-        self.check_wall_collision(d_x, d_y)
+        # pg.draw.rect(self.game.screen, 'pink',
+        # (80 * next_x, 80 * next_y, 80, 80))
+
+        if next_pos not in self.game.object_handler.npc_positions:
+            angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
+            d_x = math.cos(angle) * self.speed
+            d_y = math.sin(angle) * self.speed
+            self.check_wall_collision(d_x, d_y)
 
     def animate_death(self):
         """NPC halálát animáló függvény"""

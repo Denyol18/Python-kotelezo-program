@@ -15,6 +15,7 @@ class ObjectHandler:
         self.static_sprite_path = 'resources/sprites/static_sprites'
         add_sprite = self.add_sprite
         add_npc = self.add_npc
+        self.npc_positions = {}
 
         # Spriteok
         add_sprite(sp.Sprite(game))
@@ -28,6 +29,8 @@ class ObjectHandler:
     def update(self):
         """Objektum kezelőt frissítő függvény"""
 
+        self.npc_positions = {npc.map_pos for npc
+                              in self.npc_list if npc.alive}
         [sprite.update() for sprite in self.sprite_list]
         [npc.update() for npc in self.npc_list]
 

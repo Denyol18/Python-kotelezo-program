@@ -9,7 +9,8 @@ class PathFinding:
     def __init__(self, game):
         self.game = game
         self.map = self.game.map.mini_map
-        self.ways = [-1, 0], [0, -1], [1, 0], [0, 1], [-1, -1], [1, -1], [1, 1], [-1, 1]
+        self.ways = [-1, 0], [0, -1], [1, 0], [0, 1], \
+                    [-1, -1], [1, -1], [1, 1], [-1, 1]
         self.graph = {}
         self.get_graph()
         self.visited = 0
@@ -26,8 +27,7 @@ class PathFinding:
             step = self.visited[step]
         return path[-1]
 
-    @staticmethod
-    def bfs(start, goal, graph):
+    def bfs(self, start, goal, graph):
         """Szélességi bejárást (Breadth First Search, BFS)
          megvalósító függvény"""
 
@@ -41,7 +41,8 @@ class PathFinding:
             next_nodes = graph[cur_node]
 
             for next_node in next_nodes:
-                if next_node not in visited:
+                if next_node not in visited and next_node \
+                        not in self.game.object_handler.npc_positions:
                     queue.append(next_node)
                     visited[next_node] = cur_node
         return visited
@@ -58,4 +59,5 @@ class PathFinding:
         for y, row in enumerate(self.map):  # pylint: disable=invalid-name
             for x, col in enumerate(row):  # pylint: disable=invalid-name
                 if not col:
-                    self.graph[(x, y)] = self.graph.get((x, y), []) + self.get_next_nodes(x, y)
+                    self.graph[(x, y)] = self.graph.get((x, y), []) \
+                                         + self.get_next_nodes(x, y)
