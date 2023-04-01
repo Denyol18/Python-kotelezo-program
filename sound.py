@@ -18,8 +18,8 @@ class Sound:
 
         # Hangerő szabályzás
 
-        self.machine_gun.set_volume(0.25)
+        self.machine_gun.set_volume(0.15)
         self.npc_pain.set_volume(0.5)
-        self.npc_death.set_volume(0.25)
-        self.npc_shot.set_volume(0.25)
-        self.player_pain.set_volume(0.25)
+        self.npc_death.set_volume(0.5)
+        self.npc_shot.set_volume(0.1)
+        self.player_pain.set_volume(0.5)

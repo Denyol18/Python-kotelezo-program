@@ -21,7 +21,7 @@ class Sprite:
         self.image_width = self.image.get_width()
         self.image_half_width = self.image.get_width() // 2
         self.image_ratio = self.image_width / self.image.get_height()
-        self.screen_x, self.sprite_half_width, self.theta, self.norm_dist = 0, 0, 0, 1
+        self.screen_x, self.sprite_half_width, self.theta, self.norm_dist, self.dist = 0, 0, 0, 1, 1
         self.sprite_scale = scale
         self.sprite_height_shift = shift
 
@@ -57,8 +57,8 @@ class Sprite:
         delta_rays = delta / s.DELTA_ANGLE
         self.screen_x = (s.HALF_NUM_RAYS + delta_rays) * s.SCALE
 
-        dist = math.hypot(d_x, d_y)
-        self.norm_dist = dist * math.cos(delta)
+        self.dist = math.hypot(d_x, d_y)
+        self.norm_dist = self.dist * math.cos(delta)
         if -self.image_half_width < self.screen_x < \
                 (s.WIDTH + self.image_half_width) and self.norm_dist > 0.5:
             self.get_sprite_projection()

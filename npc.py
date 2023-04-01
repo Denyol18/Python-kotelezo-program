@@ -73,6 +73,12 @@ class NPC(sp.AnimatedSprite):
             d_y = math.sin(angle) * self.speed
             self.check_wall_collision(d_x, d_y)
 
+    def attack(self):
+        """NPC támadás hangját lejátszó függvény"""
+
+        if self.animation_trigger:
+            self.game.sound.npc_shot.play()
+
     def animate_death(self):
         """NPC halálát animáló függvény"""
 
@@ -122,8 +128,13 @@ class NPC(sp.AnimatedSprite):
 
             elif self.ray_cast_value:
                 self.player_search_trigger = True
-                self.animate(self.walk_images)
-                self.movement()
+
+                if self.dist < self.attack_dist:
+                    self.animate(self.attack_images)
+                    self.attack()
+                else:
+                    self.animate(self.walk_images)
+                    self.movement()
 
             elif self.player_search_trigger:
                 self.animate(self.walk_images)
