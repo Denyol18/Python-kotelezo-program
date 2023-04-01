@@ -16,7 +16,8 @@ class Sound:
         self.npc_shot = pg.mixer.Sound(self.path + 'npc_shot.ogg')
         self.player_pain = pg.mixer.Sound(self.path + 'player_pain.wav')
 
-        # Hangerő szabályzás
+    def volume_control(self):
+        """Hangerő szabályzó függvény"""
 
         self.machine_gun.set_volume(0.15)
         self.npc_pain.set_volume(0.5)
