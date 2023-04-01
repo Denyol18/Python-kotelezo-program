@@ -14,6 +14,14 @@ class Player:
         self.angle = s.PLAYER_ANGLE
         self.rel = 0
         self.shot = False
+        self.health = s.PLAYER_MAX_HEALTH
+
+    def get_damage(self, damage):
+        """Játékos sebződsését megvalósító függvény"""
+
+        self.health -= damage
+        self.game.object_renderer.player_damage()
+        self.game.sound.player_pain.play()
 
     def single_fire_event(self, event):
         """Játékos fegyverrel való lővését

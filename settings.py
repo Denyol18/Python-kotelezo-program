@@ -10,13 +10,14 @@ HALF_WIDTH = WIDTH // 2
 HALF_HEIGHT = HEIGHT // 2
 FPS = 60
 
-# Játékos kezdő pozíció és szög, méret, gyorsaság, forgássi sebesség
+# Játékos beállítások
 
 PLAYER_POS = 8, 4.5
 PLAYER_ANGLE = 0
 PLAYER_SPEED = 0.005
 PLAYER_ROT_SPEED = 0.005
 PLAYER_SIZE_SCALE = 60
+PLAYER_MAX_HEALTH = 100
 
 # Egér beállítások, határok
 

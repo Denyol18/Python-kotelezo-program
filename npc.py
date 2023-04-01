@@ -78,6 +78,8 @@ class NPC(sp.AnimatedSprite):
 
         if self.animation_trigger:
             self.game.sound.npc_shot.play()
+            if random() < self.accuracy:
+                self.game.player.get_damage(self.attack_damage)
 
     def animate_death(self):
         """NPC halálát animáló függvény"""
