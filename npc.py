@@ -33,6 +33,7 @@ class NPC(sp.AnimatedSprite):
         self.pain = False
         self.ray_cast_value = False
         self.frame_counter = 0
+        self.player_search_trigger = False
 
     def update(self):
         """NPCt frissítő függvény"""
@@ -58,9 +59,10 @@ class NPC(sp.AnimatedSprite):
     def movement(self):
         """NPC mozgását megvalósító függvény"""
 
-        next_pos = self.game.player.map_pos
+        next_pos = self.game.pathfinding.get_path(self.map_pos, self.game.player.map_pos)
         next_x, next_y = next_pos
 
+        # pg.draw.rect(self.game.screen, 'pink', (80 * next_x, 80 * next_y, 80, 80))
         angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
         d_x = math.cos(angle) * self.speed
         d_y = math.sin(angle) * self.speed
@@ -114,6 +116,11 @@ class NPC(sp.AnimatedSprite):
                 self.animate_pain()
 
             elif self.ray_cast_value:
+                self.player_search_trigger = True
+                self.animate(self.walk_images)
+                self.movement()
+
+            elif self.player_search_trigger:
                 self.animate(self.walk_images)
                 self.movement()
 

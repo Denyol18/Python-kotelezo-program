@@ -10,6 +10,7 @@ import object_renderer as o
 import object_handler as oh
 import weapon as w
 import sound as so
+import pathfinding as pa
 
 
 class Game:
@@ -28,6 +29,7 @@ class Game:
         self.object_handler = oh.ObjectHandler(self)
         self.weapon = w.Weapon(self)
         self.sound = so.Sound(self)
+        self.pathfinding = pa.PathFinding(self)
 
     def check_events(self):
         """Billentyű kezelő függvény"""
