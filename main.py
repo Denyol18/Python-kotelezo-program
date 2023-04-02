@@ -23,12 +23,12 @@ class Game:
         pg.event.set_grab(True)
         self.clock = pg.time.Clock()
         self.delta_time = 1
-        self.new_game()
+        self.new_game(m.mini_map_1)
 
-    def new_game(self):
+    def new_game(self, mini_map):
         """Új játékot létrehozó függvény"""
 
-        self.map = m.Map(self, m.mini_map_1)
+        self.map = m.Map(self, mini_map)
         self.player = p.Player(self)
         self.object_renderer = o.ObjectRenderer(self)
         self.raycasting = r.RayCasting(self)
