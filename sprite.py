@@ -21,27 +21,15 @@ class Sprite:
         self.image_width = self.image.get_width()
         self.image_half_width = self.image.get_width() // 2
         self.image_ratio = self.image_width / self.image.get_height()
-        self.screen_x, self.sprite_half_width, self.theta, self.norm_dist, self.dist = 0, 0, 0, 1, 1
+        self.screen_x, self.sprite_half_width, self.theta, \
+            self.norm_dist, self.dist = 0, 0, 0, 1, 1
         self.sprite_scale = scale
         self.sprite_height_shift = shift
 
-    def get_sprite_projection(self):
-        """Spriteok kivetítését lekérő függvény"""
+    def update(self):
+        """Spriteokat frissítő függvény"""
 
-        proj = s.SCREEN_DIST / self.norm_dist * self.sprite_scale
-        proj_width, proj_height = proj * self.image_ratio, proj
-
-        image = pg.transform.scale(self.image, (proj_width, proj_height))
-
-        self.sprite_half_width = proj_width // 2
-
-        height_shift = proj_height * self.sprite_height_shift
-
-        pos = self.screen_x - self.sprite_half_width, \
-            s.HALF_HEIGHT - proj_height // 2 + height_shift
-
-        self.game.raycasting.objects_to_render.append(
-            (self.norm_dist, image, pos))
+        self.get_sprite()
 
     def get_sprite(self):
         """Spriteot lekérő függvény"""
@@ -63,10 +51,23 @@ class Sprite:
                 (s.WIDTH + self.image_half_width) and self.norm_dist > 0.5:
             self.get_sprite_projection()
 
-    def update(self):
-        """Spriteokat frissítő függvény"""
+    def get_sprite_projection(self):
+        """Spriteok kivetítését lekérő függvény"""
 
-        self.get_sprite()
+        proj = s.SCREEN_DIST / self.norm_dist * self.sprite_scale
+        proj_width, proj_height = proj * self.image_ratio, proj
+
+        image = pg.transform.scale(self.image, (proj_width, proj_height))
+
+        self.sprite_half_width = proj_width // 2
+
+        height_shift = proj_height * self.sprite_height_shift
+
+        pos = self.screen_x - self.sprite_half_width, \
+            s.HALF_HEIGHT - proj_height // 2 + height_shift
+
+        self.game.raycasting.objects_to_render.append(
+            (self.norm_dist, image, pos))
 
 
 class AnimatedSprite(Sprite):
@@ -91,13 +92,6 @@ class AnimatedSprite(Sprite):
         self.check_animation_time()
         self.animate(self.images)
 
-    def animate(self, images):
-        """Animáció lejátszó függvény"""
-
-        if self.animation_trigger:
-            images.rotate(-1)
-            self.image = images[0]
-
     def check_animation_time(self):
         """Animáció idő figyelő függvény"""
 
@@ -106,6 +100,13 @@ class AnimatedSprite(Sprite):
         if time_now - self.animation_time_prev > self.animation_time:
             self.animation_time_prev = time_now
             self.animation_trigger = True
+
+    def animate(self, images):
+        """Animáció lejátszó függvény"""
+
+        if self.animation_trigger:
+            images.rotate(-1)
+            self.image = images[0]
 
     @staticmethod
     def get_images(path):

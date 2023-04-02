@@ -20,52 +20,12 @@ class Player:
         self.time_prev = pg.time.get_ticks()
         self.diag_move_corr = 1 / math.sqrt(2)
 
-    def recover_health(self):
-        """Játékos életerő visszanyerését megvalósító
-        függvény"""
+    def update(self):
+        """Játékos frissítő függvény"""
 
-        if self.check_health_recovery_delay() and self.health \
-                < s.PLAYER_MAX_HEALTH:
-
-            self.health += 1
-
-    def check_health_recovery_delay(self):
-        """Játékos életerő visszanyerésének késleltetés
-        figyelő függvénye"""
-
-        time_now = pg.time.get_ticks()
-        if time_now - self.time_prev > self.health_recovery_delay:
-            self.time_prev = time_now
-            return True
-
-    def check_game_over(self):
-        """Játékos halálának, azaz a játék végét
-        figyelő függvény"""
-
-        if self.health < 1:
-            self.game.object_renderer.game_over()
-            pg.display.flip()
-            pg.time.delay(1500)
-            self.game.new_game()
-
-    def get_damage(self, damage):
-        """Játékos sebződsését megvalósító függvény"""
-
-        self.health -= damage
-        self.game.object_renderer.player_damage()
-        self.game.sound.player_pain.play()
-        self.check_game_over()
-
-    def single_fire_event(self, event):
-        """Játékos fegyverrel való lővését
-        kezelő függvény"""
-
-        if event.type == pg.MOUSEBUTTONDOWN:
-            if event.button == 1 and not self.shot and \
-                    not self.game.weapon.reloading:
-                self.game.sound.machine_gun.play()
-                self.shot = True
-                self.game.weapon.reloading = True
+        self.movement()
+        self.mouse_control()
+        self.recover_health()
 
     def movement(self):
         """Játékos mozgásáért felelős függvény"""
@@ -116,11 +76,6 @@ class Player:
 
         self.angle %= math.tau
 
-    def check_wall(self, x, y):  # pylint: disable=invalid-name
-        """Falat detektáló függvény"""
-
-        return (x, y) not in self.game.map.world_map
-
     def check_wall_collision(self, inc_x, inc_y):
         """Fallal való ütközés detektáló és kezelő függvény"""
 
@@ -130,15 +85,10 @@ class Player:
         if self.check_wall(int(self.x), int(self.y + inc_y * scale)):
             self.y += inc_y
 
-    def draw(self):
-        """Játékost reprezentáló kör és iránymutató
-        vonal rajzoló függvény debugging célból"""
+    def check_wall(self, x, y):  # pylint: disable=invalid-name
+        """Falat detektáló függvény"""
 
-        pg.draw.line(self.game.screen, 'blue', (self.x * 80, self.y * 80),
-                     (self.x * 80 + s.WIDTH * math.cos(self.angle),
-                     self.y * 80 + s.WIDTH * math.sin(self.angle)), 2)
-        pg.draw.circle(self.game.screen, 'yellow',
-                       (self.x * 80, self.y * 80), 15)
+        return (x, y) not in self.game.map.world_map
 
     def mouse_control(self):
         """A játékos forgásáért felelős függvény"""
@@ -152,12 +102,63 @@ class Player:
         self.rel = max(-s.MOUSE_MAX_REL, min(s.MOUSE_MAX_REL, self.rel))
         self.angle += self.rel * s.MOUSE_SENSITIVITY * self.game.delta_time
 
-    def update(self):
-        """Játékos frissítő függvény"""
+    def recover_health(self):
+        """Játékos életerő visszanyerését megvalósító
+        függvény"""
 
-        self.movement()
-        self.mouse_control()
-        self.recover_health()
+        if self.check_health_recovery_delay() and self.health \
+                < s.PLAYER_MAX_HEALTH:
+
+            self.health += 1
+
+    def check_health_recovery_delay(self):
+        """Játékos életerő visszanyerésének késleltetés
+        figyelő függvénye"""
+
+        time_now = pg.time.get_ticks()
+        if time_now - self.time_prev > self.health_recovery_delay:
+            self.time_prev = time_now
+            return True
+        return False
+
+    def get_damage(self, damage):
+        """Játékos sebződsését megvalósító függvény"""
+
+        self.health -= damage
+        self.game.object_renderer.player_damage()
+        self.game.sound.player_pain.play()
+        self.check_game_over()
+
+    def check_game_over(self):
+        """Játékos halálának, azaz a játék végét
+        figyelő függvény"""
+
+        if self.health < 1:
+            self.game.object_renderer.game_over()
+            pg.display.flip()
+            pg.time.delay(1500)
+            self.game.new_game()
+
+    def single_fire_event(self, event):
+        """Játékos fegyverrel való lővését
+        kezelő függvény"""
+
+        if event.type == pg.MOUSEBUTTONDOWN:
+            if event.button == 1 and not self.shot and \
+                    not self.game.weapon.reloading:
+                self.game.sound.machine_gun.play()
+                self.shot = True
+                self.game.weapon.reloading = True
+
+    def draw(self):
+        """Játékost reprezentáló kör és iránymutató
+        vonal rajzoló függvény debugging célból"""
+
+        pg.draw.line(self.game.screen, 'blue', (self.x * 80, self.y * 80),
+                     (self.x * 80 + s.WIDTH * math.cos(self.angle),
+                     self.y * 80 + s.WIDTH * math.sin(self.angle)), 2)
+        pg.draw.circle(self.game.screen, 'yellow',
+                       (self.x * 80, self.y * 80), 15)
 
     @property
     def pos(self):

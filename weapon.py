@@ -26,11 +26,6 @@ class Weapon(sp.AnimatedSprite):
         self.frame_counter = 0
         self.damage = 20
 
-    def draw(self):
-        """Fegyvert megrajzoló függvény"""
-
-        self.game.screen.blit(self.images[0], self.weapon_pos)
-
     def update(self):
         """Fegyvert frissítő függvény"""
 
@@ -49,3 +44,8 @@ class Weapon(sp.AnimatedSprite):
                 if self.frame_counter == self.num_images:
                     self.reloading = False
                     self.frame_counter = 0
+
+    def draw(self):
+        """Fegyvert megrajzoló függvény"""
+
+        self.game.screen.blit(self.images[0], self.weapon_pos)

@@ -1,7 +1,7 @@
 """NPCk scriptje"""
 
 import math
-from random import randint, random, choice
+from random import randint, random
 import pygame as pg
 import settings as s
 import sprite as sp
@@ -43,81 +43,6 @@ class NPC(sp.AnimatedSprite):
         self.run_logic()
         # self.draw_ray_cast()
 
-    def check_wall(self, x, y):  # pylint: disable=invalid-name
-        """Falat detektáló függvény"""
-
-        return (x, y) not in self.game.map.world_map
-
-    def check_wall_collision(self, inc_x, inc_y):
-        """Fallal való ütközés detektáló és kezelő függvény"""
-
-        if self.check_wall(int(self.x + inc_x * self.size), int(self.y)):
-            self.x += inc_x
-        if self.check_wall(int(self.x), int(self.y + inc_y * self.size)):
-            self.y += inc_y
-
-    def movement(self):
-        """NPC mozgását megvalósító függvény"""
-
-        next_pos = self.game.pathfinding.get_path(self.map_pos,
-                                                  self.game.player.map_pos)
-
-        next_x, next_y = next_pos
-
-        # pg.draw.rect(self.game.screen, 'pink',
-        # (80 * next_x, 80 * next_y, 80, 80))
-
-        if next_pos not in self.game.object_handler.npc_positions:
-            angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
-            d_x = math.cos(angle) * self.speed
-            d_y = math.sin(angle) * self.speed
-            self.check_wall_collision(d_x, d_y)
-
-    def attack(self):
-        """NPC támadás hangját lejátszó függvény"""
-
-        if self.animation_trigger:
-            self.game.sound.npc_shot.play()
-            if random() < self.accuracy:
-                self.game.player.get_damage(self.attack_damage)
-
-    def animate_death(self):
-        """NPC halálát animáló függvény"""
-
-        if not self.alive:
-            if self.animation_trigger and self.frame_counter \
-                    < len(self.death_images) - 1:
-
-                self.death_images.rotate(-1)
-                self.image = self.death_images[0]
-                self.frame_counter += 1
-
-    def animate_pain(self):
-        """NPC sérülését animáló függvény"""
-
-        self.animate(self.pain_images)
-        if self.animation_trigger:
-            self.pain = False
-
-    def check_hit_in_npc(self):
-        """NPCt való eltalálás vizsgáló függvény"""
-
-        if self.ray_cast_value and self.game.player.shot:
-            if s.HALF_WIDTH - self.sprite_half_width < self.screen_x \
-                    < s.HALF_HEIGHT + self.sprite_half_width:
-                self.game.sound.npc_pain.play()
-                self.game.player.shot = False
-                self.pain = True
-                self.health -= self.game.weapon.damage
-                self.check_health()
-
-    def check_health(self):
-        """NPC életerejét vizsgáló függvény"""
-
-        if self.health < 1:
-            self.alive = False
-            self.game.sound.npc_death.play()
-
     def run_logic(self):
         """NPC életciklusát megvalósító és figyelő függvény"""
 
@@ -146,13 +71,6 @@ class NPC(sp.AnimatedSprite):
                 self.animate(self.idle_images)
         else:
             self.animate_death()
-
-    @property
-    def map_pos(self):
-        """Függvény mely visszatér azzal a négyzettel,
-        amelyiken az NPC éppen áll"""
-
-        return int(self.x), int(self.y)
 
     def ray_cast_player_npc(self):
         """Ray castinget megvalósító függvény
@@ -220,6 +138,89 @@ class NPC(sp.AnimatedSprite):
         if 0 < player_dist < wall_dist or not wall_dist:
             return True
         return False
+
+    def check_hit_in_npc(self):
+        """NPCt való eltalálás vizsgáló függvény"""
+
+        if self.ray_cast_value and self.game.player.shot:
+            if s.HALF_WIDTH - self.sprite_half_width < self.screen_x \
+                    < s.HALF_HEIGHT + self.sprite_half_width:
+                self.game.sound.npc_pain.play()
+                self.game.player.shot = False
+                self.pain = True
+                self.health -= self.game.weapon.damage
+                self.check_health()
+
+    def animate_pain(self):
+        """NPC sérülését animáló függvény"""
+
+        self.animate(self.pain_images)
+        if self.animation_trigger:
+            self.pain = False
+
+    def check_health(self):
+        """NPC életerejét vizsgáló függvény"""
+
+        if self.health < 1:
+            self.alive = False
+            self.game.sound.npc_death.play()
+
+    def animate_death(self):
+        """NPC halálát animáló függvény"""
+
+        if not self.alive:
+            if self.animation_trigger and self.frame_counter \
+                    < len(self.death_images) - 1:
+
+                self.death_images.rotate(-1)
+                self.image = self.death_images[0]
+                self.frame_counter += 1
+
+    def attack(self):
+        """NPC támadás hangját lejátszó függvény"""
+
+        if self.animation_trigger:
+            self.game.sound.npc_shot.play()
+            if random() < self.accuracy:
+                self.game.player.get_damage(self.attack_damage)
+
+    def movement(self):
+        """NPC mozgását megvalósító függvény"""
+
+        next_pos = self.game.pathfinding.get_path(self.map_pos,
+                                                  self.game.player.map_pos)
+
+        next_x, next_y = next_pos
+
+        # Rajzolás debugging célból
+        # pg.draw.rect(self.game.screen, 'pink',
+        # (80 * next_x, 80 * next_y, 80, 80))
+
+        if next_pos not in self.game.object_handler.npc_positions:
+            angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
+            d_x = math.cos(angle) * self.speed
+            d_y = math.sin(angle) * self.speed
+            self.check_wall_collision(d_x, d_y)
+
+    def check_wall_collision(self, inc_x, inc_y):
+        """Fallal való ütközés detektáló és kezelő függvény"""
+
+        if self.check_wall(int(self.x + inc_x * self.size), int(self.y)):
+            self.x += inc_x
+        if self.check_wall(int(self.x), int(self.y + inc_y * self.size)):
+            self.y += inc_y
+
+    def check_wall(self, x, y):  # pylint: disable=invalid-name
+        """Falat detektáló függvény"""
+
+        return (x, y) not in self.game.map.world_map
+
+    @property
+    def map_pos(self):
+        """Függvény mely visszatér azzal a négyzettel,
+        amelyiken az NPC éppen áll"""
+
+        return int(self.x), int(self.y)
 
     def draw_ray_cast(self):
         """ray_cast_player_npc függvényt tesztelő

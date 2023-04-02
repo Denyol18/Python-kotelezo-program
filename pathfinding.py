@@ -15,6 +15,21 @@ class PathFinding:
         self.get_graph()
         self.visited = 0
 
+    def get_graph(self):
+        """Játéktérből gráfot csináló függvény"""
+
+        for y, row in enumerate(self.map):  # pylint: disable=invalid-name
+            for x, col in enumerate(row):  # pylint: disable=invalid-name
+                if not col:
+                    self.graph[(x, y)] = self.graph.get((x, y), []) \
+                                         + self.get_next_nodes(x, y)
+
+    def get_next_nodes(self, x, y):  # pylint: disable=invalid-name
+        """Következő nodeot lekérő és azzal visszatérő függvény"""
+
+        return [(x + d_x, y + d_y) for d_x, d_y in self.ways
+                if (x + d_x, y + d_y) not in self.game.map.world_map]
+
     def get_path(self, start, goal):
         """Utat lekérő, annak végével visszatérő függvény"""
 
@@ -46,18 +61,3 @@ class PathFinding:
                     queue.append(next_node)
                     visited[next_node] = cur_node
         return visited
-
-    def get_next_nodes(self, x, y):  # pylint: disable=invalid-name
-        """Következő nodeot lekérő és azzal visszatérő függvény"""
-
-        return [(x + d_x, y + d_y) for d_x, d_y in self.ways
-                if (x + d_x, y + d_y) not in self.game.map.world_map]
-
-    def get_graph(self):
-        """Játéktérből grafikont csináló függvény"""
-
-        for y, row in enumerate(self.map):  # pylint: disable=invalid-name
-            for x, col in enumerate(row):  # pylint: disable=invalid-name
-                if not col:
-                    self.graph[(x, y)] = self.graph.get((x, y), []) \
-                                         + self.get_next_nodes(x, y)

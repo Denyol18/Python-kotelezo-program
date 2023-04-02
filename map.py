@@ -28,6 +28,13 @@ class Map:
         self.world_map = {}
         self.get_map()
 
+    def draw(self):
+        """A játékteret megrajzoló függvény debugging célból"""
+
+        [pg.draw.rect(self.game.screen, 'green',
+                      (pos[0] * 80, pos[1] * 80, 80, 80), 2)
+         for pos in self.world_map]
+
     def get_map(self):
         """Játékteret lekérő és létrehozó függvény"""
 
@@ -35,10 +42,3 @@ class Map:
             for j, value in enumerate(row):
                 if value:
                     self.world_map[(j, i)] = value
-
-    def draw(self):
-        """A játékteret megrajzoló függvény debugging célból"""
-
-        [pg.draw.rect(self.game.screen, 'green',
-                      (pos[0] * 80, pos[1] * 80, 80, 80), 2)
-         for pos in self.world_map]

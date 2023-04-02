@@ -23,7 +23,8 @@ class ObjectRenderer:
                              for i in range(11)]
 
         self.digits = dict(zip(map(str, range(11)), self.digit_images))
-        self.game_over_image = self.get_texture('resources/textures/game_over.png', s.RES)
+        self.game_over_image = self.get_texture('resources/textures/'
+                                                'game_over.png', s.RES)
 
     def draw(self):
         """A rajzoló függvények együttesét
@@ -32,11 +33,6 @@ class ObjectRenderer:
         self.draw_background()
         self.render_game_objects()
         self.draw_player_health()
-
-    def game_over(self):
-        """Játék végén lévő képet rajzoló függvény"""
-
-        self.screen.blit(self.game_over_image, (0, 0))
 
     def draw_player_health(self):
         """Játékos életerejét kirajzoló függvény"""
@@ -52,6 +48,11 @@ class ObjectRenderer:
         """Játékos sebződésekor rajzoló függvény"""
 
         self.screen.blit(self.blood_screen, (0, 0))
+
+    def game_over(self):
+        """Játék végén lévő képet rajzoló függvény"""
+
+        self.screen.blit(self.game_over_image, (0, 0))
 
     def draw_background(self):
         """Háttér rajzoló függvény"""
@@ -80,13 +81,6 @@ class ObjectRenderer:
 
             self.screen.blit(image, pos)
 
-    @staticmethod
-    def get_texture(path, res=(s.TEXTURE_SIZE, s.TEXTURE_SIZE)):
-        """Textúrát lekérő statikus függvény"""
-
-        texture = pg.image.load(path).convert_alpha()
-        return pg.transform.scale(texture, res)
-
     def load_wall_textures(self):
         """Fall textúrákat betöltő függvény"""
 
@@ -95,3 +89,10 @@ class ObjectRenderer:
             2: self.get_texture('resources/textures/1.jpg'),
             3: self.get_texture('resources/textures/1.jpg')
         }
+
+    @staticmethod
+    def get_texture(path, res=(s.TEXTURE_SIZE, s.TEXTURE_SIZE)):
+        """Textúrát lekérő statikus függvény"""
+
+        texture = pg.image.load(path).convert_alpha()
+        return pg.transform.scale(texture, res)

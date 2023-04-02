@@ -14,37 +14,11 @@ class RayCasting:
         self.objects_to_render = []
         self.textures = self.game.object_renderer.wall_textures
 
-    def get_objects_to_render(self):
-        """Megrajzolni kívánt objektumokat lekérő és tároló függvény"""
+    def update(self):
+        """Ray castinget frissítő függvény"""
 
-        self.objects_to_render = []
-        for ray, values in enumerate(self.result):
-            depth, proj_height, texture, offset = values
-
-            if proj_height < s.HEIGHT:
-                wall_column = self.textures[texture].subsurface(
-                    offset * (s.TEXTURE_SIZE - s.SCALE), 0,
-                    s.SCALE, s.TEXTURE_SIZE
-                )
-
-                wall_column = pg.transform.scale(wall_column,
-                                                 (s.SCALE, proj_height))
-
-                wall_pos = (ray * s.SCALE, s.HALF_HEIGHT - proj_height // 2)
-            else:
-                texture_height = s.TEXTURE_SIZE * s.HEIGHT / proj_height
-
-                wall_column = self.textures[texture].subsurface(
-                    offset * (s.TEXTURE_SIZE - s.SCALE),
-                    s.HALF_TEXTURE_SIZE - texture_height // 2,
-                    s.SCALE, texture_height
-                )
-
-                wall_column = pg.transform.scale(wall_column,
-                                                 (s.SCALE, s.HEIGHT))
-                wall_pos = (ray * s.SCALE, 0)
-
-            self.objects_to_render.append((depth, wall_column, wall_pos))
+        self.ray_cast()
+        self.get_objects_to_render()
 
     def ray_cast(self):
         """Ray castinget megvalósító függvény"""
@@ -120,8 +94,34 @@ class RayCasting:
 
             ray_angle += s.DELTA_ANGLE
 
-    def update(self):
-        """Ray castinget frissítő függvény"""
+    def get_objects_to_render(self):
+        """Megrajzolni kívánt objektumokat lekérő és tároló függvény"""
 
-        self.ray_cast()
-        self.get_objects_to_render()
+        self.objects_to_render = []
+        for ray, values in enumerate(self.result):
+            depth, proj_height, texture, offset = values
+
+            if proj_height < s.HEIGHT:
+                wall_column = self.textures[texture].subsurface(
+                    offset * (s.TEXTURE_SIZE - s.SCALE), 0,
+                    s.SCALE, s.TEXTURE_SIZE
+                )
+
+                wall_column = pg.transform.scale(wall_column,
+                                                 (s.SCALE, proj_height))
+
+                wall_pos = (ray * s.SCALE, s.HALF_HEIGHT - proj_height // 2)
+            else:
+                texture_height = s.TEXTURE_SIZE * s.HEIGHT / proj_height
+
+                wall_column = self.textures[texture].subsurface(
+                    offset * (s.TEXTURE_SIZE - s.SCALE),
+                    s.HALF_TEXTURE_SIZE - texture_height // 2,
+                    s.SCALE, texture_height
+                )
+
+                wall_column = pg.transform.scale(wall_column,
+                                                 (s.SCALE, s.HEIGHT))
+                wall_pos = (ray * s.SCALE, 0)
+
+            self.objects_to_render.append((depth, wall_column, wall_pos))
