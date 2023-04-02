@@ -16,13 +16,14 @@ class ObjectRenderer:
         self.sky_offset = 0
         self.blood_screen = self.get_texture('resources/textures/'
                                              'blood.png', s.RES)
-        self.digit_size = 60
+        self.digit_size = 90
         self.digit_images = [self.get_texture(f'resources/textures/'
                                               f'digits/{i}.png',
                                               [self.digit_size] * 2)
                              for i in range(11)]
 
         self.digits = dict(zip(map(str, range(11)), self.digit_images))
+        self.game_over_image = self.get_texture('resources/textures/game_over.png', s.RES)
 
     def draw(self):
         """A rajzoló függvények együttesét
@@ -31,6 +32,11 @@ class ObjectRenderer:
         self.draw_background()
         self.render_game_objects()
         self.draw_player_health()
+
+    def game_over(self):
+        """Játék végén lévő képet rajzoló függvény"""
+
+        self.screen.blit(self.game_over_image, (0, 0))
 
     def draw_player_health(self):
         """Játékos életerejét kirajzoló függvény"""

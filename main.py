@@ -20,8 +20,14 @@ class Game:
         pg.init()
         pg.mouse.set_visible(False)
         self.screen = pg.display.set_mode(s.RES)
+        pg.event.set_grab(True)
         self.clock = pg.time.Clock()
         self.delta_time = 1
+        self.new_game()
+
+    def new_game(self):
+        """Új játékot létrehozó függvény"""
+
         self.map = m.Map(self)
         self.player = p.Player(self)
         self.object_renderer = o.ObjectRenderer(self)
@@ -30,16 +36,6 @@ class Game:
         self.weapon = w.Weapon(self)
         self.sound = so.Sound(self)
         self.pathfinding = pa.PathFinding(self)
-
-    def check_events(self):
-        """Billentyű kezelő függvény"""
-
-        for event in pg.event.get():
-            if event.type == pg.QUIT or \
-                    (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-                pg.quit()
-                sys.exit()
-            self.player.single_fire_event(event)
 
     def update(self):
         """Ablakot megjelenítő, azt adatokkal folyamatosan ellátó függvény"""
@@ -61,6 +57,16 @@ class Game:
         self.weapon.draw()
         # self.map.draw()
         # self.player.draw()
+
+    def check_events(self):
+        """Billentyű kezelő függvény"""
+
+        for event in pg.event.get():
+            if event.type == pg.QUIT or \
+                    (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                pg.quit()
+                sys.exit()
+            self.player.single_fire_event(event)
 
     def run(self):
         """Játékot futtató függvény, mainben kell meghívni"""
