@@ -145,6 +145,7 @@ class NPC(sp.AnimatedSprite):
         if self.ray_cast_value and self.game.player.shot:
             if s.HALF_WIDTH - self.sprite_half_width < self.screen_x \
                     < s.HALF_HEIGHT + self.sprite_half_width:
+
                 self.game.sound.npc_pain.play()
                 self.game.player.shot = False
                 self.pain = True
@@ -187,8 +188,7 @@ class NPC(sp.AnimatedSprite):
     def movement(self):
         """NPC mozgását megvalósító függvény"""
 
-        next_pos = self.game.pathfinding.get_path(self.map_pos,
-                                                  self.game.player.map_pos)
+        next_pos = self.game.pathfinding.get_path(self.map_pos, self.game.player.map_pos)
 
         next_x, next_y = next_pos
 

@@ -107,8 +107,7 @@ class RayCasting:
                     s.SCALE, s.TEXTURE_SIZE
                 )
 
-                wall_column = pg.transform.scale(wall_column,
-                                                 (s.SCALE, proj_height))
+                wall_column = pg.transform.scale(wall_column, (s.SCALE, proj_height))
 
                 wall_pos = (ray * s.SCALE, s.HALF_HEIGHT - proj_height // 2)
             else:
@@ -120,8 +119,7 @@ class RayCasting:
                     s.SCALE, texture_height
                 )
 
-                wall_column = pg.transform.scale(wall_column,
-                                                 (s.SCALE, s.HEIGHT))
+                wall_column = pg.transform.scale(wall_column, (s.SCALE, s.HEIGHT))
                 wall_pos = (ray * s.SCALE, 0)
 
             self.objects_to_render.append((depth, wall_column, wall_pos))
