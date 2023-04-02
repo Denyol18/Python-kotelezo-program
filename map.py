@@ -6,7 +6,7 @@ import pygame as pg
 
 _ = False
 
-mini_map = [
+mini_map_1 = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 1],
     [1, _, _, 2, 2, 2, _, _, _, _, _, 3, 3, _, _, 1],
@@ -29,7 +29,7 @@ mini_map = [
 class Map:
     """A játékteret reprezentáló osztály"""
 
-    def __init__(self, game):
+    def __init__(self, game, mini_map):
         self.game = game
         self.mini_map = mini_map
         self.world_map = {}

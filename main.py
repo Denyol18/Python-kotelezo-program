@@ -28,7 +28,7 @@ class Game:
     def new_game(self):
         """Új játékot létrehozó függvény"""
 
-        self.map = m.Map(self)
+        self.map = m.Map(self, m.mini_map_1)
         self.player = p.Player(self)
         self.object_renderer = o.ObjectRenderer(self)
         self.raycasting = r.RayCasting(self)
