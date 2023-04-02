@@ -18,6 +18,7 @@ class Player:
         self.rel = 0
         self.health_recovery_delay = 1500
         self.time_prev = pg.time.get_ticks()
+        self.diag_move_corr = 1 / math.sqrt(2)
 
     def recover_health(self):
         """Játékos életerő visszanyerését megvalósító
@@ -77,21 +78,33 @@ class Player:
         speed_cos = speed * cos_a
 
         keys = pg.key.get_pressed()
+        num_keys_pressed = -1
+
         if keys[pg.K_w]:
+            num_keys_pressed += 1
             inc_x += speed_cos
             inc_y += speed_sin
 
         if keys[pg.K_s]:
+            num_keys_pressed += 1
             inc_x += -speed_cos
             inc_y += -speed_sin
 
         if keys[pg.K_a]:
+            num_keys_pressed += 1
             inc_x += speed_sin
             inc_y += -speed_cos
 
         if keys[pg.K_d]:
+            num_keys_pressed += 1
             inc_x += -speed_sin
             inc_y += speed_cos
+
+        # Átlós mozgás javítása
+
+        if num_keys_pressed:
+            inc_x *= self.diag_move_corr
+            inc_y *= self.diag_move_corr
 
         self.check_wall_collision(inc_x, inc_y)
 
