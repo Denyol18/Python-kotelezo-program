@@ -36,6 +36,7 @@ class Game:
         self.weapon = w.Weapon(self)
         self.sound = so.Sound(self)
         self.pathfinding = pa.PathFinding(self)
+        self.npc_count = len(self.object_handler.npc_list)
 
     def update(self):
         """Ablakot megjelenítő, azt adatokkal folyamatosan ellátó függvény"""
@@ -52,11 +53,11 @@ class Game:
     def draw(self):
         """Ablakba elemeket rajzoló függvény"""
 
-        # self.screen.fill('black')
-        self.object_renderer.draw()
-        self.weapon.draw()
-        # self.map.draw()
-        # self.player.draw()
+        self.screen.fill('black')
+        #self.object_renderer.draw()
+        #self.weapon.draw()
+        self.map.draw()
+        self.player.draw()
 
     def check_events(self):
         """Billentyű kezelő függvény"""

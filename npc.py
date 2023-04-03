@@ -23,12 +23,12 @@ class NPC(sp.AnimatedSprite):
         self.pain_images = self.get_images(self.path + '/pain')
         self.walk_images = self.get_images(self.path + '/walk')
 
-        self.attack_dist = randint(3, 6)
+        self.attack_dist = randint(2, 3)
         self.speed = 0.02
         self.size = 10
         self.health = 100
         self.attack_damage = 10
-        self.accuracy = 0.15
+        self.accuracy = 0.25
         self.alive = True
         self.pain = False
         self.ray_cast_value = False
@@ -41,7 +41,7 @@ class NPC(sp.AnimatedSprite):
         self.check_animation_time()
         self.get_sprite()
         self.run_logic()
-        # self.draw_ray_cast()
+        self.draw_ray_cast()
 
     def run_logic(self):
         """NPC életciklusát megvalósító és figyelő függvény"""
@@ -165,6 +165,7 @@ class NPC(sp.AnimatedSprite):
         if self.health < 1:
             self.alive = False
             self.game.sound.npc_death.play()
+            self.game.npc_count -= 1
 
     def animate_death(self):
         """NPC halálát animáló függvény"""

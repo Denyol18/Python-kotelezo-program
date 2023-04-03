@@ -20,6 +20,7 @@ class Player:
         self.health_recovery_delay = 1500
         self.time_prev = pg.time.get_ticks()
         self.diag_move_corr = 1 / math.sqrt(2)
+        self.levels_done = 0
 
     def update(self):
         """Játékos frissítő függvény"""
@@ -27,6 +28,7 @@ class Player:
         self.movement()
         self.mouse_control()
         self.recover_health()
+        self.check_level_done()
 
     def movement(self):
         """Játékos mozgásáért felelős függvény"""
@@ -132,13 +134,25 @@ class Player:
 
     def check_game_over(self):
         """Játékos halálának, azaz a játék végét
-        figyelő függvény"""
+         figyelő és azt újraindító függvény"""
 
         if self.health < 1:
             self.game.object_renderer.game_over()
             pg.display.flip()
             pg.time.delay(1500)
             self.game.new_game(m.mini_map_1)
+
+    def check_level_done(self):
+        """Szint teljesítését figyelő függvény"""
+
+        if self.game.npc_count == 0:
+            self.game.object_renderer.level_done()
+            pg.display.flip()
+            pg.time.delay(1500)
+
+            if self.levels_done == 0:
+                self.game.new_game(m.mini_map_2)
+                self.levels_done += 1
 
     def single_fire_event(self, event):
         """Játékos fegyverrel való lővését

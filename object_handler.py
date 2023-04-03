@@ -23,8 +23,10 @@ class ObjectHandler:
         add_sprite(sp.Sprite(game, pos=(9.8, 5.5)))
 
         # NPCk
-        add_npc(n.NPC(game))
         add_npc(n.NPC(game, pos=(11.5, 3.5)))
+        add_npc(n.NPC(game, pos=(4.5, 4.5)))
+        add_npc(n.NPC(game, pos=(9.5, 1.75)))
+        add_npc(n.NPC(game, pos=(13.5, 1.75)))
 
     def update(self):
         """Objektum kezelőt frissítő függvény"""

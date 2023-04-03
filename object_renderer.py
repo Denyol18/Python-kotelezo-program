@@ -25,6 +25,8 @@ class ObjectRenderer:
         self.digits = dict(zip(map(str, range(11)), self.digit_images))
         self.game_over_image = self.get_texture('resources/textures/'
                                                 'game_over.png', s.RES)
+        self.level_done_image = self.get_texture('resources/textures/'
+                                                 'level_done.png', s.RES)
 
     def draw(self):
         """A rajzoló függvények együttesét
@@ -53,6 +55,11 @@ class ObjectRenderer:
         """Játék végén lévő képet rajzoló függvény"""
 
         self.screen.blit(self.game_over_image, (0, 0))
+
+    def level_done(self):
+        """Szint teljesítést követő képet rajzoló függvény"""
+
+        self.screen.blit(self.level_done_image, (0, 0))
 
     def draw_background(self):
         """Háttér rajzoló függvény"""
