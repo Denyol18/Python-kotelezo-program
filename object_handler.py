@@ -2,6 +2,7 @@
 
 import sprite as sp
 import npc as n
+import settings as s
 
 
 class ObjectHandler:
@@ -17,16 +18,35 @@ class ObjectHandler:
         add_npc = self.add_npc
         self.npc_positions = {}
 
-        # Spriteok
-        add_sprite(sp.Sprite(game))
-        add_sprite(sp.Sprite(game, pos=(1.8, 1.8)))
-        add_sprite(sp.Sprite(game, pos=(9.8, 5.5)))
+        if s.levels_done == 0:
+            # Spriteok
+            add_sprite(sp.Sprite(game))
+            add_sprite(sp.Sprite(game, pos=(1.8, 1.8)))
+            add_sprite(sp.Sprite(game, pos=(9.8, 5.5)))
 
-        # NPCk
-        add_npc(n.NPC(game, pos=(11.5, 3.5)))
-        add_npc(n.NPC(game, pos=(4.5, 4.5)))
-        add_npc(n.NPC(game, pos=(9.5, 1.75)))
-        add_npc(n.NPC(game, pos=(13.5, 1.75)))
+            # NPCk
+            add_npc(n.NPC(game, pos=(4.5, 4.5)))
+            add_npc(n.NPC(game, pos=(9.5, 1.75)))
+            add_npc(n.NPC(game, pos=(11.5, 3.5)))
+            add_npc(n.NPC(game, pos=(13.5, 1.75)))
+
+        elif s.levels_done == 1:
+            add_npc(n.NPC(game, pos=(4.5, 4.5)))
+            add_npc(n.NPC(game, pos=(2.5, 7.5)))
+            add_npc(n.NPC(game, pos=(6.5, 8.5)))
+            add_npc(n.NPC(game, pos=(4.5, 2.5)))
+            add_npc(n.NPC(game, pos=(11.5, 4.5)))
+            add_npc(n.NPC(game, pos=(12.5, 9.5)))
+
+        elif s.levels_done == 2:
+            add_npc(n.NPC(game, pos=(4.5, 4.5)))
+            add_npc(n.NPC(game, pos=(4.5, 6.5)))
+            add_npc(n.NPC(game, pos=(4.5, 9.5)))
+            add_npc(n.NPC(game, pos=(2.5, 12.5)))
+            add_npc(n.NPC(game, pos=(8.5, 5.5)))
+            add_npc(n.NPC(game, pos=(12.5, 13.5)))
+            add_npc(n.NPC(game, pos=(14.5, 5.5)))
+            add_npc(n.NPC(game, pos=(10.5, 1.75)))
 
     def update(self):
         """Objektum kezelőt frissítő függvény"""

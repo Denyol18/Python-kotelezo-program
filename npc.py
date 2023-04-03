@@ -41,7 +41,7 @@ class NPC(sp.AnimatedSprite):
         self.check_animation_time()
         self.get_sprite()
         self.run_logic()
-        self.draw_ray_cast()
+        # self.draw_ray_cast()
 
     def run_logic(self):
         """NPC életciklusát megvalósító és figyelő függvény"""

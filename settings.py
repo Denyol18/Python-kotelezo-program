@@ -18,6 +18,7 @@ PLAYER_SPEED = 0.005
 PLAYER_ROT_SPEED = 0.005
 PLAYER_SIZE_SCALE = 60
 PLAYER_MAX_HEALTH = 100
+levels_done = 0  # pylint: disable=invalid-name
 
 # Egér beállítások, határok
 

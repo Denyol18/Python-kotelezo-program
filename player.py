@@ -17,10 +17,9 @@ class Player:
         self.shot = False
         self.health = s.PLAYER_MAX_HEALTH
         self.rel = 0
-        self.health_recovery_delay = 1500
+        self.health_recovery_delay = 1000
         self.time_prev = pg.time.get_ticks()
         self.diag_move_corr = 1 / math.sqrt(2)
-        self.levels_done = 0
 
     def update(self):
         """Játékos frissítő függvény"""
@@ -138,6 +137,7 @@ class Player:
 
         if self.health < 1:
             self.game.object_renderer.game_over()
+            s.levels_done = 0
             pg.display.flip()
             pg.time.delay(1500)
             self.game.new_game(m.mini_map_1)
@@ -147,12 +147,20 @@ class Player:
 
         if self.game.npc_count == 0:
             self.game.object_renderer.level_done()
+            s.levels_done += 1
             pg.display.flip()
             pg.time.delay(1500)
 
-            if self.levels_done == 0:
+            if s.levels_done == 1:
                 self.game.new_game(m.mini_map_2)
-                self.levels_done += 1
+            elif s.levels_done == 2:
+                self.game.new_game(m.mini_map_3)
+            elif s.levels_done == 3:
+                self.game.new_game(m.mini_map_4)
+            elif s.levels_done == 4:
+                self.game.new_game(m.mini_map_5)
+            else:
+                pg.quit()
 
     def single_fire_event(self, event):
         """Játékos fegyverrel való lővését
