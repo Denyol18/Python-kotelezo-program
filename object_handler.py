@@ -2,7 +2,6 @@
 
 import sprite as sp
 import npc as n
-import settings as s
 
 
 class ObjectHandler:
@@ -18,7 +17,7 @@ class ObjectHandler:
         add_npc = self.add_npc
         self.npc_positions = {}
 
-        if s.levels_done == 0:
+        if self.game.levels_done == 0:
             # Spriteok
             add_sprite(sp.Sprite(game))
             add_sprite(sp.Sprite(game, pos=(1.8, 1.8)))
@@ -30,7 +29,7 @@ class ObjectHandler:
             add_npc(n.NPC(game, pos=(11.5, 3.5)))
             add_npc(n.NPC(game, pos=(13.5, 1.75)))
 
-        elif s.levels_done == 1:
+        elif self.game.levels_done == 1:
             add_npc(n.NPC(game, pos=(4.5, 4.5)))
             add_npc(n.NPC(game, pos=(2.5, 7.5)))
             add_npc(n.NPC(game, pos=(6.5, 8.5)))
@@ -38,7 +37,7 @@ class ObjectHandler:
             add_npc(n.NPC(game, pos=(11.5, 4.5)))
             add_npc(n.NPC(game, pos=(12.5, 9.5)))
 
-        elif s.levels_done == 2:
+        elif self.game.levels_done == 2:
             add_npc(n.NPC(game, pos=(4.5, 4.5)))
             add_npc(n.NPC(game, pos=(4.5, 6.5)))
             add_npc(n.NPC(game, pos=(4.5, 9.5)))

@@ -147,17 +147,17 @@ class Player:
 
         if self.game.npc_count == 0:
             self.game.object_renderer.level_done()
-            s.levels_done += 1
+            self.game.levels_done += 1
             pg.display.flip()
             pg.time.delay(1500)
 
-            if s.levels_done == 1:
+            if self.game.levels_done == 1:
                 self.game.new_game(m.mini_map_2)
-            elif s.levels_done == 2:
+            elif self.game.levels_done == 2:
                 self.game.new_game(m.mini_map_3)
-            elif s.levels_done == 3:
+            elif self.game.levels_done == 3:
                 self.game.new_game(m.mini_map_4)
-            elif s.levels_done == 4:
+            elif self.game.levels_done == 4:
                 self.game.new_game(m.mini_map_5)
             else:
                 pg.quit()

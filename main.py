@@ -23,6 +23,7 @@ class Game:
         pg.event.set_grab(True)
         self.clock = pg.time.Clock()
         self.delta_time = 1
+        self.levels_done = 0
         self.new_game(m.mini_map_1)
 
     def new_game(self, mini_map):
