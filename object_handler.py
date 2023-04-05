@@ -47,6 +47,18 @@ class ObjectHandler:
             add_npc(n.NPC(game, pos=(14.5, 5.5)))
             add_npc(n.NPC(game, pos=(10.5, 1.75)))
 
+        elif self.game.levels_done == 3:
+            add_npc(n.NPC(game, pos=(7.5, 2.5)))
+            add_npc(n.NPC(game, pos=(14.5, 2.5)))
+            add_npc(n.NPC(game, pos=(12.5, 3.5)))
+            add_npc(n.NPC(game, pos=(14.5, 14.5)))
+            add_npc(n.NPC(game, pos=(1.5, 15.5)))
+            add_npc(n.NPC(game, pos=(5.5, 12.5)))
+            add_npc(n.NPC(game, pos=(12.5, 9.5)))
+            add_npc(n.NPC(game, pos=(6.5, 7.5)))
+            add_npc(n.NPC(game, pos=(4.5, 7.5)))
+            add_npc(n.NPC(game, pos=(1.5, 4.5)))
+
     def update(self):
         """Objektum kezelőt frissítő függvény"""
 
