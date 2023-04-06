@@ -67,11 +67,6 @@ class Game:
             if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 pg.quit()
                 sys.exit()
-            elif event.type == pg.KEYDOWN:
-                if event.key == pg.K_r:
-                    pg.display.flip()
-                    self.levels_done = 0
-                    self.new_game(m.mini_map_1)
             self.player.single_fire_event(event)
 
     def run(self):

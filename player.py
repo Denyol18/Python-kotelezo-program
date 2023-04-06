@@ -169,12 +169,11 @@ class Player:
                     if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                         pg.quit()
                         sys.exit()
-                    elif event.type == pg.KEYDOWN:
-                        if event.key == pg.K_r:
-                            pg.display.flip()
-                            self.game.levels_done = 0
-                            self.game.new_game(m.mini_map_1)
-                            break
+                    elif event.type == pg.KEYDOWN and event.key == pg.K_r:
+                        pg.display.flip()
+                        self.game.levels_done = 0
+                        self.game.new_game(m.mini_map_1)
+                        break
 
     def single_fire_event(self, event):
         """Játékos fegyverrel való lővését

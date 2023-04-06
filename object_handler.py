@@ -19,9 +19,6 @@ class ObjectHandler:
 
         if self.game.levels_done == 0:
             # Spriteok
-            add_sprite(sp.Sprite(game))
-            add_sprite(sp.Sprite(game, pos=(1.8, 1.8)))
-            add_sprite(sp.Sprite(game, pos=(9.8, 5.5)))
 
             # NPCk
             add_npc(n.NPC(game, pos=(4.5, 4.5)))
