@@ -1,5 +1,6 @@
 """Játékos scriptje"""
 
+import sys
 import math
 import pygame as pg
 import settings as s
@@ -110,7 +111,6 @@ class Player:
 
         if self.check_health_recovery_delay() and self.health \
                 < s.PLAYER_MAX_HEALTH:
-
             self.health += 1
 
     def check_health_recovery_delay(self):
@@ -143,7 +143,7 @@ class Player:
             self.game.new_game(m.mini_map_1)
 
     def check_level_done(self):
-        """Szint teljesítését figyelő függvény"""
+        """Szint és/vagy játék teljesítését figyelő függvény"""
 
         if self.game.npc_count == 0:
             self.game.object_renderer.level_done()
@@ -160,7 +160,21 @@ class Player:
             elif self.game.levels_done == 4:
                 self.game.new_game(m.mini_map_5)
             else:
-                pg.quit()
+                self.game.object_renderer.game_done()
+                pg.display.flip()
+
+                # Billentyű kezelő
+                while True:
+                    event = pg.event.wait()
+                    if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
+                        pg.quit()
+                        sys.exit()
+                    elif event.type == pg.KEYDOWN:
+                        if event.key == pg.K_r:
+                            pg.display.flip()
+                            self.game.levels_done = 0
+                            self.game.new_game(m.mini_map_1)
+                            break
 
     def single_fire_event(self, event):
         """Játékos fegyverrel való lővését
@@ -179,7 +193,7 @@ class Player:
 
         pg.draw.line(self.game.screen, 'blue', (self.x * 80, self.y * 80),
                      (self.x * 80 + s.WIDTH * math.cos(self.angle),
-                     self.y * 80 + s.WIDTH * math.sin(self.angle)), 2)
+                      self.y * 80 + s.WIDTH * math.sin(self.angle)), 2)
         pg.draw.circle(self.game.screen, 'yellow',
                        (self.x * 80, self.y * 80), 15)
 
