@@ -157,7 +157,7 @@ class Player:
                     sys.exit()
                 elif event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
                     pg.display.flip()
-                    self.game.levels_done = 0
+                    self.game.levels_done += 1
                     self.game.new_game(m.mini_map_1)
                     break
 
