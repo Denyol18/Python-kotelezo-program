@@ -137,7 +137,7 @@ class Player:
 
         if self.health < 1:
             self.game.object_renderer.game_over()
-            s.levels_done = 0
+            self.game.levels_done = 0
             pg.display.flip()
             pg.time.delay(1500)
             self.game.new_game(m.mini_map_1)
