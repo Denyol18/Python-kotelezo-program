@@ -145,35 +145,52 @@ class Player:
     def check_level_done(self):
         """Szint és/vagy játék teljesítését figyelő függvény"""
 
-        if self.game.npc_count == 0:
-            self.game.object_renderer.level_done()
-            self.game.levels_done += 1
+        if self.game.levels_done == -1:
+            self.game.object_renderer.start()
             pg.display.flip()
-            pg.time.delay(1500)
 
-            if self.game.levels_done == 1:
-                self.game.new_game(m.mini_map_2)
-            elif self.game.levels_done == 2:
-                self.game.new_game(m.mini_map_3)
-            elif self.game.levels_done == 3:
-                self.game.new_game(m.mini_map_4)
-            elif self.game.levels_done == 4:
-                self.game.new_game(m.mini_map_5)
-            else:
-                self.game.object_renderer.game_done()
+            # Billentyű kezelő
+            while True:
+                event = pg.event.wait()
+                if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
+                    pg.quit()
+                    sys.exit()
+                elif event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+                    pg.display.flip()
+                    self.game.levels_done = 0
+                    self.game.new_game(m.mini_map_1)
+                    break
+
+        else:
+            if self.game.npc_count == 0:
+                self.game.object_renderer.level_done()
+                self.game.levels_done += 1
                 pg.display.flip()
+                pg.time.delay(1500)
 
-                # Billentyű kezelő
-                while True:
-                    event = pg.event.wait()
-                    if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
-                        pg.quit()
-                        sys.exit()
-                    elif event.type == pg.KEYDOWN and event.key == pg.K_r:
-                        pg.display.flip()
-                        self.game.levels_done = 0
-                        self.game.new_game(m.mini_map_1)
-                        break
+                if self.game.levels_done == 1:
+                    self.game.new_game(m.mini_map_2)
+                elif self.game.levels_done == 2:
+                    self.game.new_game(m.mini_map_3)
+                elif self.game.levels_done == 3:
+                    self.game.new_game(m.mini_map_4)
+                elif self.game.levels_done == 4:
+                    self.game.new_game(m.mini_map_5)
+                else:
+                    self.game.object_renderer.game_done()
+                    pg.display.flip()
+
+                    # Billentyű kezelő
+                    while True:
+                        event = pg.event.wait()
+                        if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
+                            pg.quit()
+                            sys.exit()
+                        elif event.type == pg.KEYDOWN and event.key == pg.K_r:
+                            pg.display.flip()
+                            self.game.levels_done = 0
+                            self.game.new_game(m.mini_map_1)
+                            break
 
     def single_fire_event(self, event):
         """Játékos fegyverrel való lővését

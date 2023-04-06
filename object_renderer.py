@@ -29,6 +29,8 @@ class ObjectRenderer:
                                                  'level_done.png', s.RES)
         self.game_done_image = self.get_texture('resources/textures/'
                                                 'game_done.png', s.RES)
+        self.start_screen = self.get_texture('resources/textures/'
+                                             'start.png', s.RES)
 
     def draw(self):
         """A rajzoló függvények együttesét
@@ -52,6 +54,11 @@ class ObjectRenderer:
         """Játékos sebződésekor rajzoló függvény"""
 
         self.screen.blit(self.blood_screen, (0, 0))
+
+    def start(self):
+        """Játék elején lévő képet rajzoló függvény"""
+
+        self.screen.blit(self.start_screen, (0, 0))
 
     def game_over(self):
         """Játék végén lévő képet rajzoló függvény"""
