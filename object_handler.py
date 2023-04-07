@@ -63,6 +63,37 @@ class ObjectHandler:
             add_npc(n.NPC(game, pos=(12.5, 9.5)))
 
         elif self.game.levels_done == 2:
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/bones.png',
+                                 pos=(2.75, 3.75), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/bones.png',
+                                 pos=(2.75, 5.25), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/bones.png',
+                                 pos=(1.25, 12.25), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/bones.png',
+                                 pos=(1.25, 13), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/bones.png',
+                                 pos=(1.25, 13.75), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/bones.png',
+                                 pos=(5.25, 3.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, pos=(6.75, 9.75)))
+            add_sprite(sp.Sprite(game, pos=(6.75, 9.25)))
+            add_sprite(sp.Sprite(game, pos=(6.25, 9.75)))
+            add_sprite(sp.Sprite(game, pos=(12.75, 11.75)))
+            add_sprite(sp.Sprite(game, pos=(12.75, 8.75)))
+            add_sprite(sp.Sprite(game, pos=(14.75, 1.25)))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/puddle.png',
+                                 pos=(3.5, 1.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/puddle.png',
+                                 pos=(4.5, 11.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/puddle.png',
+                                 pos=(8.5, 12.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/puddle.png',
+                                 pos=(11.5, 13.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/puddle.png',
+                                 pos=(11.5, 7.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/puddle.png',
+                                 pos=(14.5, 8.5), scale=1, shift=0.1))
+
             add_npc(n.NPC(game, pos=(4.5, 4.5)))
             add_npc(n.NPC(game, pos=(4.5, 6.5)))
             add_npc(n.NPC(game, pos=(4.5, 9.5)))
