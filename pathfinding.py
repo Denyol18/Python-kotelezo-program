@@ -1,6 +1,9 @@
 """Útkereső scriptje"""
 
 from collections import deque
+from tkinter import messagebox
+import sys
+import pygame as pg
 
 
 class PathFinding:
@@ -49,15 +52,20 @@ class PathFinding:
         queue = deque([start])
         visited = {start: None}
 
-        while queue:
-            cur_node = queue.popleft()
-            if cur_node == goal:
-                break
-            next_nodes = graph[cur_node]
+        try:
+            while queue:
+                cur_node = queue.popleft()
+                if cur_node == goal:
+                    break
+                next_nodes = graph[cur_node]
 
-            for next_node in next_nodes:
-                if next_node not in visited and next_node \
-                        not in self.game.object_handler.npc_positions:
-                    queue.append(next_node)
-                    visited[next_node] = cur_node
-        return visited
+                for next_node in next_nodes:
+                    if next_node not in visited and next_node \
+                            not in self.game.object_handler.npc_positions:
+                        queue.append(next_node)
+                        visited[next_node] = cur_node
+            return visited
+        except KeyError:
+            messagebox.showinfo("Info", "An error occured, the game now closes :(")
+            pg.quit()
+            sys.exit()
