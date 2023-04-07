@@ -106,9 +106,9 @@ class ObjectRenderer:
         """Fall textúrákat betöltő függvény"""
 
         return {
-            1: self.get_texture('resources/textures/1.jpg'),
-            2: self.get_texture('resources/textures/1.jpg'),
-            3: self.get_texture('resources/textures/1.jpg')
+            1: self.get_texture('resources/textures/1.png'),
+            2: self.get_texture('resources/textures/2.png'),
+            3: self.get_texture('resources/textures/3.png')
         }
 
     @staticmethod
