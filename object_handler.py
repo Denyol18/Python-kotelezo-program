@@ -19,6 +19,15 @@ class ObjectHandler:
 
         if self.game.levels_done == 0:
             # Spriteok
+            add_sprite(sp.Sprite(game, pos=(6.25, 1.25)))
+            add_sprite(sp.Sprite(game, pos=(6.25, 1.75)))
+            add_sprite(sp.Sprite(game, pos=(6.25, 2.25)))
+            add_sprite(sp.Sprite(game, pos=(6.25, 2.75)))
+            add_sprite(sp.Sprite(game, pos=(11.25, 7.75)))
+            add_sprite(sp.Sprite(game, pos=(11.75, 7.75)))
+            add_sprite(sp.Sprite(game, pos=(12.25, 7.75)))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/table.png',
+                                 pos=(8.25, 1.75), scale=1, shift=0.1))
 
             # NPCk
             add_npc(n.NPC(game, pos=(4.5, 4.5)))
@@ -27,6 +36,25 @@ class ObjectHandler:
             add_npc(n.NPC(game, pos=(13.5, 1.75)))
 
         elif self.game.levels_done == 1:
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(2.75, 5.75), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(4.25, 9.25), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(9.75, 3.25), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(8.25, 8.75), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(14.75, 10.75), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(14.75, 1.25), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/table.png',
+                                 pos=(4.5, 7.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/table.png',
+                                 pos=(11.25, 3.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/table.png',
+                                 pos=(4.25, 1.5), scale=1, shift=0.1))
+
             add_npc(n.NPC(game, pos=(4.5, 4.5)))
             add_npc(n.NPC(game, pos=(2.5, 7.5)))
             add_npc(n.NPC(game, pos=(6.5, 8.5)))
