@@ -104,6 +104,43 @@ class ObjectHandler:
             add_npc(n.NPC(game, pos=(10.5, 1.75)))
 
         elif self.game.levels_done == 3:
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/table.png',
+                                 pos=(2.5, 4.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/table.png',
+                                 pos=(3.5, 5.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/table.png',
+                                 pos=(1.5, 16.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/table.png',
+                                 pos=(12.5, 4.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/vase.png',
+                                 pos=(5.75, 3.25), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/vase.png',
+                                 pos=(5.75, 6.75), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/vase.png',
+                                 pos=(12.25, 7.75), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/vase.png',
+                                 pos=(11.75, 8.25), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/vase.png',
+                                 pos=(14.75, 16.75), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/vase.png',
+                                 pos=(14.75, 16.25), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(9.75, 5.25), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(10.75, 6.25), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(4.75, 9.25), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(1.25, 10.75), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(11.75, 14.75), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/plant.png',
+                                 pos=(13.25, 8.75), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/sink.png',
+                                 pos=(8.5, 8.5), scale=1, shift=0.1))
+            add_sprite(sp.Sprite(game, path='resources/sprites/static_sprites/sink.png',
+                                 pos=(6.5, 14.75), scale=1, shift=0.1))
+
             add_npc(n.NPC(game, pos=(7.5, 2.5)))
             add_npc(n.NPC(game, pos=(14.5, 2.5)))
             add_npc(n.NPC(game, pos=(12.5, 3.5)))
