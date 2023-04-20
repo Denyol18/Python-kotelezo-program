@@ -70,7 +70,7 @@ class Game:
             self.player.single_fire_event(event)
 
     def run(self):
-        """Játékot futtató függvény, mainben kell meghívni"""
+        """Játékot futtató függvény"""
 
         while True:
             self.check_events()
