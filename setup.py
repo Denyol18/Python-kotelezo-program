@@ -4,7 +4,7 @@ setup(
     name='python_kotprog_game',
     version='1.0.0',
     packages=['python_kotelezo_program', 'tests', 'reports'],
-    package_data={'': ['.pylintrc', 'README.md' 'resources/sounds/*.wav', 'resources/sounds/*.ogg',
+    package_data={'': ['.pylintrc', 'README.md', 'resources/sounds/*.wav', 'resources/sounds/*.ogg',
                        'resources/sprites/npc/guard/attack/*.png',
                        'resources/sprites/npc/guard/death/*.png',
                        'resources/sprites/npc/guard/idle/*.png',
