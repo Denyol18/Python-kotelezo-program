@@ -19,7 +19,7 @@ Hogy most az Irinyi egy rejtett zugában jársz-e vagy valami teljesen más vil�
 Magad mellett a falnak támasztva találsz egy puskát. Úgy döntesz viszed magaddal, jó lesz önvédelemre
 ha bármilyen életveszélyes szituációba keveredsz ahol az életedre törnek.
 Elindulsz egy folyosón majd egyszer csak szembekerülsz egy másik emberrel. Mielőtt bármit hozzászolnál emberünk rögtön
-elkezd rád lőnni és menekülni kényszerülsz. Átjárja a tested a halálfélelem és rájössz, hogy muszáj lesz szembeszálni
+elkezd rád lőni és menekülni kényszerülsz. Átjárja a tested a halálfélelem és rájössz, hogy muszáj lesz szembeszálni
 ezzel az emberrel. Sikerült legyűrnöd, de az nem derült ki miért is támadott rád.
 
 **Bárhova is kerültél, innen ki kell szabadulnod!**
