@@ -20,9 +20,6 @@ setup(
                        'pylint_reports/*.json',
                        'test_coverage_reports/*.json']},
     install_requires=['setuptools~=65.5.0', 'pygame~=2.3.0'],
-    url='',
-    license='',
     author='Denyol',
-    author_email='',
     description='Python programozás a gyakorlatban kötelező program - Játék'
 )
