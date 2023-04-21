@@ -207,9 +207,9 @@ class NPC(sp.AnimatedSprite):
         """Fallal való ütközés detektáló és kezelő függvény"""
 
         if self.check_wall(int(self.x + inc_x * self.size), int(self.y)):
-            self.x += inc_x
+            self.x += inc_x  # pylint: disable=invalid-name
         if self.check_wall(int(self.x), int(self.y + inc_y * self.size)):
-            self.y += inc_y
+            self.y += inc_y  # pylint: disable=invalid-name
 
     def check_wall(self, x, y):  # pylint: disable=invalid-name
         """Falat detektáló függvény"""

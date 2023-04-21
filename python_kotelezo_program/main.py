@@ -2,8 +2,8 @@
 
 import sys
 import pygame as pg
-import python_kotelezo_program.map as m
-import python_kotelezo_program.settings as s
+import python_kotelezo_program.map as m         # Az ilyen fajta importokra import-errort ír a pylint,
+import python_kotelezo_program.settings as s    # pedig működnek úgyhogy disable-re raktam
 import python_kotelezo_program.player as p
 import python_kotelezo_program.raycasting as r
 import python_kotelezo_program.object_renderer as o
