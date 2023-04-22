@@ -51,3 +51,15 @@ gombbal.
 > Bal egérgomb - Puskával lövés
 
 > Forogni az egér balra és jobbra mozgatásával lehet.
+
+
+## Projekt struktúra:
+
+### python_kotelezo_program
+> Magának a játéknak a mappája, a program entry point a main.py-ban található.
+
+### reports
+> Pylint, flake8 és test coverage reportok helye
+
+### tests
+> Unit tesztek helye
